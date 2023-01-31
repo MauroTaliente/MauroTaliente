@@ -1,6 +1,8 @@
 import React from 'react'
 import useAtomsGuilde from '../../build/atoms';
 
+import { css } from '@emotion/react';
+
 const Hero = () => {
   const {
     theme: { name, colors },
@@ -63,7 +65,7 @@ const Hero = () => {
 
   return (
     <section css={hero.container}>
-      <div css={hero.content}>
+      <div css={css(hero.content)}>
         <main css={hero.hola}>
           <h1 css={hero.h1}
             onClick={applyNextTheme}

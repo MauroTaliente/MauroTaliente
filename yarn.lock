@@ -3665,10 +3665,10 @@ react-dom@^18.2.0:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
 
-react-emotion-styles-guide@^0.4.2:
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/react-emotion-styles-guide/-/react-emotion-styles-guide-0.4.2.tgz#cff395b2173ec5360bce34aa37da0bece04ef899"
-  integrity sha512-0/XajZj6vIcolmKulfcF9wsoOEx8yoHh0xNMUOT50eFNS4LZHNlmYJJtXyqrHi5wwFUUfip990YGvP8DGbbung==
+react-emotion-styles-guide@^0.4.3:
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/react-emotion-styles-guide/-/react-emotion-styles-guide-0.4.3.tgz#3b48a3fb5bce6c5ef61675844211ebf3c1111dac"
+  integrity sha512-sdrY3zClmJ8TLE1xONiQv0GLtboW2qwM5ajwzv7H43ZzfINOOQyQVdHDZDVUbLweKkTWFsQtSpFfh8+0WNHF6Q==
   dependencies:
     "@emotion/react" "^11.10.5"
     facepaint "^1.2.1"

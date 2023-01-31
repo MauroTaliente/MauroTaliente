@@ -54,7 +54,7 @@ const useAtomsGuilde = (refreshLevel: 0 | 1 = 0) => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-end',
-        alignItems: 'flex-start',
+        alignItems: 'flex-end',
       },
       cb: {
         display: 'flex',
@@ -66,16 +66,16 @@ const useAtomsGuilde = (refreshLevel: 0 | 1 = 0) => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'flex-start',
+        alignItems: 'flex-end',
       },
     }, (s: any) => s);
 
     const commons = styleSheets({
       hedings: {
-        fontWeight: 700,
+        fontWeight: 500,
         fontFamily: fontFamily.display,
         color: colors.primary,
-        lineHeight: '1.35em',
+        lineHeight: '1.5em',
         whiteSpace: 'pre-line',
       },
       texts: {
@@ -83,13 +83,13 @@ const useAtomsGuilde = (refreshLevel: 0 | 1 = 0) => {
         fontFamily: fontFamily.body,
         color: colors.secondary,
         lineHeight: '1.35em',
-        whiteSpace: 'pre-line', 
       }
     });
 
     const texts = styleSheets({
       h1: {
         ...commons.hedings,
+        fontWeight: 700,
         fontSize: '3em',
       },
       h2: {
@@ -119,6 +119,19 @@ const useAtomsGuilde = (refreshLevel: 0 | 1 = 0) => {
       b2: {
         ...commons.texts,
         fontSize: small ? '1em' : '1.2em',
+      },
+      d1: {
+        ...commons.texts,
+        color: colors.primary,
+        fontSize: '1em',
+        textTransform: 'uppercase',
+        letterSpacing: '0.2em',
+      },
+      d2: {
+        ...commons.texts,
+        fontSize: '0.8em',
+        textTransform: 'uppercase',
+        letterSpacing: '0.2em',
       },
       a: {
         color: colors.acent,

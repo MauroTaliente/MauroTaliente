@@ -1,10 +1,14 @@
-import React from "react";
-import { createRoot, hydrateRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import { App } from "./App";
+import React from 'react';
+import { createRoot, hydrateRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import { App } from './App';
 
-const container = document.getElementById("app");
-
+// app const.
+const container = document.getElementById('app') as HTMLElement;
+const missingApp = !container?.innerText;
+// dev consts.
+const hotReload = import.meta.hot;
+// App compose Strict => Router => CotenteApp.
 const FullApp = () => {
   return (
     <React.StrictMode>
@@ -15,9 +19,13 @@ const FullApp = () => {
   );
 };
 
-if (import.meta.hot || !container?.innerText) {
+if (hotReload || missingApp) {
+  // build new app.
+  // console.log('RENDER');
   const root = createRoot(container!);
   root.render(<FullApp />);
 } else {
-  hydrateRoot(container!, <FullApp />);
+  // hydrate new app.
+  // console.log('HYDRATE');
+  hydrateRoot(container, <FullApp />);
 }

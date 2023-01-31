@@ -4,7 +4,7 @@ import ProjectCard from '../../build/organisms/ProjectCard';
 
 const data = [
   {
-    title: 'Livo app',
+    title: 'Daria & Livo',
     resume: 'La mejor opción para la búsqueda y alquiler de tu nuevo hogar o emprendimiento.',
     tags: ['comercial', 'front end', 'back end'],
     onClick: () => {},
@@ -37,7 +37,7 @@ const Proyects = () => {
       ...briks.container,
       label: 'container',
       zIndex: 2,
-      backgroundColor: `${colors.bgSecondary}30`,
+      backgroundColor: colors.bgPrimary,
     },
     content: {
       ...briks.content,
@@ -61,6 +61,7 @@ const Proyects = () => {
     },
   });
 
+  // TODO MISSSING TITLE
   return (
     <section css={styles.container}>
       <div css={styles.content}>

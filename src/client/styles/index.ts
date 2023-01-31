@@ -1,4 +1,5 @@
 import newStyleGuide from 'react-emotion-styles-guide';
+
 import mauro from './themes/mauro';
 import fabi from './themes/fabi';
 
@@ -6,6 +7,7 @@ const {
  useStyleGuide,
  StyleGuideProvider,
 } = newStyleGuide({
+  noSsr: { active: true },
   breakPoints: { sm: 640, md: 768, lg: 1024, xl: 1280, sl: 1440, ul: 1920 },
   initThemeName: 'mauro',
   root: {
@@ -13,7 +15,7 @@ const {
     fontFamily: { display: 'Font Family' },
   },
   scheme: {
-    name: ['mauro', 'fabi', 'themeMila', 'pancho'],
+    // name: ['mauro', 'fabi', 'themeMila', 'pancho'],
     tags: ['dark', 'light', 'small', 'rounded'],
     colors: ['acent', 'primary', 'secondary', 'ngAcent', 'bgPrimary', 'bgSecondary'],
     fontFamily: ['display', 'body', 'element'],
