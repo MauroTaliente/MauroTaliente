@@ -12,7 +12,6 @@ const History = () => {
   const css = styleSheets({
     main: {
       ...flex.rc,
-      zIndex: 2,
     },
     d2: {
       ...texts.d2,
@@ -41,7 +40,7 @@ const History = () => {
 
   return (
     <section css={briks.container}>
-      <div css={briks.content}>
+      <div css={[briks.content, { zIndex: 5 }]}>
         <main css={css.main}>
           <h5 css={css.d2}>{
             `Curriculum`
