@@ -1,20 +1,18 @@
 import React from 'react'
 import useAtomsGuilde from '../../build/atoms';
 
-import { css } from '@emotion/react';
-
 const Hero = () => {
   const {
     theme: { name, colors },
     helpers: { styleSheets, setTheme },
     atoms: { flex, briks, texts },
     state: { 
-      mediaFlags: { md },
       themesFlags,
+      mediaFlags: { md },
     },
   } = useAtomsGuilde(1);
 
-  const hero = styleSheets({
+  const css = styleSheets({
     container: {
       ...briks.container,
       label: 'container',
@@ -23,15 +21,14 @@ const Hero = () => {
     },
     content: {
       ...briks.content,
+      alignItems: 'flex-end',
       label: 'content',
-      minHeight: '480px',
       flexDirection: md ? 'row' : 'column',
     },
     hola: {
       ...flex.rc,
       label: 'hola',
-      paddingTop: '4rem',
-      flex: 1,
+      flex:  4,
     },
     h1: {
       ...texts.h1,
@@ -45,14 +42,22 @@ const Hero = () => {
       paddingBottom: '1rem'
     },
     mauro: {
+      ...flex.cc,
       label: 'mauro',
       display: 'flex',
-      alignSelf: 'flex-end',
-      maxWidth: '320px',
+      flex: 3,
       marginBottom: '-2rem',
-      imageRendering: 'crisp-edges',
+      position: 'relative',
+      overflow: 'hidden',
     },
+    image: {
+      objectFit: 'cover',
+      width: '100%',
+      height: '100%',
+    }
   });
+
+  const image = 'https://storage.cloud.google.com/mauro-web-bucket/images/mauro_saludo';
 
   const applyNextTheme = () => {
     const themeNames = Object.keys(themesFlags);
@@ -64,16 +69,16 @@ const Hero = () => {
   };
 
   return (
-    <section css={hero.container}>
-      <div css={css(hero.content)}>
-        <main css={hero.hola}>
-          <h1 css={hero.h1}
+    <section css={css.container}>
+      <div css={css.content}>
+        <main css={css.hola}>
+          <h1 css={css.h1}
             onClick={applyNextTheme}
           >{
             `Hola 👋,
             soy Mauro.`
           }</h1>
-          <h4 css={hero.b1}>{
+          <h4 css={css.b1}>{
             `Sr FrontEnd Developer 
             con más de 8 años de experiencia
             y conocimiento de JavaScript, 
@@ -85,11 +90,13 @@ const Hero = () => {
           `🤘 Disponible para trabajar`
           }</a>
         </main>
-        <img css={hero.mauro}
-          src="static/assets/images/mauro_saludo.png"
-          srcSet="static/assets/images/mauro_saludo@2x.png 1.5x"
-          alt="emogi de Mauro saludando"
-        />
+        <aside css={css.mauro}>
+          <img css={css.image}
+            src={`${image}.png`}
+            srcSet={`${image}@2x.png 1.5x`}
+            alt="emogi de Mauro saludando"
+          />
+        </aside>
       </div>
     </section>
   );

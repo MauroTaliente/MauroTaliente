@@ -7,22 +7,24 @@ const SimplePage: FC<any> = ({ children }) => {
     theme: { colors },
     helpers: { styleSheets },
     atoms: { flex },
+    state: { tagsFlags: { box }}
   } = useAtomsGuilde();
+
+  const rootBgColor = box ? colors.bgPrimary : colors.bgSecondary;
   
-  const IS_SSR = typeof document === 'undefined';
   useEffect(() => {
-    if (!IS_SSR) {
+    const IS_SSR = typeof document === 'undefined';
+    if (!IS_SSR)
       document
         ?.querySelector('body')
-        ?.style.setProperty('--bodyColor', colors.bgSecondary);
-    }
+        ?.style.setProperty('--bodyColor', rootBgColor);
     return () => {};
-  }, [IS_SSR, colors.bgSecondary])
+  }, [rootBgColor])
   
   const main = styleSheets({
     container: {
       minHeight: '100vh',
-      backgroundColor: colors.bgSecondary,
+      backgroundColor: rootBgColor,
     },
   });
 

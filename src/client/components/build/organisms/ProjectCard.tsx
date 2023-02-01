@@ -8,7 +8,11 @@ interface ProjectCardProps {
   index: number;
   total: number;
   title: string;
-  image?: { src: string; alt: string; },
+  image?: {
+    src: string;
+    srcSet: string;
+    alt: string;
+  };
   tags: string[];
   resume: string;  
   onClick: () => void; 
@@ -83,15 +87,18 @@ const ProjectCard: FC<ProjectCardProps> = ({
     aside: {
       ...flex.cc,
       flex: 2,
+      borderRadius: '1em',
+      backgroundColor: colors.ngAcent,
     },
     image: {
       display: 'flex',
       width: '100%',
+      maxWidth: '256px',
     },
   });
 
   const defaultImage = {
-    src: `static/assets/images/mauro_donut.png`,
+    src: `https://storage.cloud.google.com/mauro-web-bucket/images/mauro_donut.png`,
     alt: 'Donut',
   };
 

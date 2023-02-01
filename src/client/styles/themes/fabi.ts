@@ -10,8 +10,8 @@ export default {
     bgSecondary: '#F8F8FA',
   },
   fontFamily: {
-    display: 'Raleway',
-    body: 'Playfair Display',
-    element: 'Raleway',
+    display: 'Lato',
+    body: 'IBM Plex Sans',
+    element: 'Lato',
   },
 } as const;

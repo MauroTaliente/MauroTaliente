@@ -12,10 +12,11 @@ const History = () => {
   const css = styleSheets({
     main: {
       ...flex.rc,
+      // zIndex: 2,
     },
     d2: {
       ...texts.d2,
-      paddingBottom: '1em'
+      paddingBottom: '1em',
     },
     d1: {
       ...texts.d1,
@@ -54,12 +55,12 @@ const History = () => {
           }</p>
         </main>
         <footer css={css.footer}>
-        <a href="https://www.linkedin.com/in/maurotaliente/" >
-          <Button title='LinkedIn' />
-        </a>
-        <a href="#" >
-          <Button title='Descargar CV' />
-        </a>
+          <a href="https://www.linkedin.com/in/maurotaliente/" target="_blank" rel="noreferrer">
+            <Button title='LinkedIn' />
+          </a>
+          <a href="static/assets/MauroTalienteCv.pdf" target="_blank" >
+            <Button title='Descargar CV' />
+          </a>
         </footer>
       </div>
     </section>

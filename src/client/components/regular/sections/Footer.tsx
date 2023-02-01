@@ -13,6 +13,7 @@ const Fotter = () => {
     container: {
       ...briks.container,
       backgroundColor: colors.bgPrimary,
+      zIndex: 2,
     },
     label: {
       ...texts.d2,

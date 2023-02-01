@@ -75,11 +75,11 @@ const useAtomsGuilde = (refreshLevel: 0 | 1 = 0) => {
         fontWeight: 500,
         fontFamily: fontFamily.display,
         color: colors.primary,
-        lineHeight: '1.5em',
+        lineHeight: '1.35em',
         whiteSpace: 'pre-line',
       },
       texts: {
-        fontWeight: 400,
+        fontWeight: 300,
         fontFamily: fontFamily.body,
         color: colors.secondary,
         lineHeight: '1.35em',

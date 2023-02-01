@@ -41,11 +41,11 @@ const Button: FC<ButtonProps> = ({
       cursor: 'pointer',
       fontFamily: fontFamily.element,
       fontSize: sml ? '0.8em' : '1rem',
-      fontWeight: '600',
+      fontWeight: 600,
       padding: '1em 1.5em',
       color: reg ? colors.ngAcent : colors.acent,
       backgroundColor: reg ? colors.acent : sec ? colors.ngAcent : 'transparent',
-      borderRadius: rounded ? '0.75em' : '0.25em',
+      borderRadius: rounded ? '2em' : '0.25em',
       '&: hover': {
         backgroundColor: `${colors.acent}9D`,
       }

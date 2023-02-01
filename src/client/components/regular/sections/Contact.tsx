@@ -5,29 +5,35 @@ const Contact = () => {
   const {
     theme: { colors },
     atoms: { flex, briks, texts },
-    state: { tagsFlags: { rounded }},
+    state: {
+      tagsFlags: { rounded },
+      mediaFlags: { md },
+    },
     helpers: { styleSheets },
-  } = useAtomsGuilde(0);
+  } = useAtomsGuilde(1);
 
   const css = styleSheets({
     card: {
       ...flex.rb,
-      padding: '2em',
-      flexDirection: 'row',
+      width: '100%',
+      padding: md ? '2em' : '2em 1em',
+      flexDirection: md ? 'row' : 'column',
       backgroundColor: colors.bgPrimary,
       border: `1px solid ${colors.acent}`,
       borderRadius: rounded ? '1em' : '0.5em',
+      zIndex: 2,
     },
     main: {
+      width: '100%',
       ...flex.rc,
-      flex: 3,
+      flex: md ? 3 : 1,
     },
     label: {
       ...texts.d2,
       paddingBottom: '1em'
     },
     email: {
-      ...texts.h4,
+      ...md ? texts.h4 : texts.h5,
       paddingBottom: '1rem',
       color: colors.acent,
       lineHeight: '2em',
@@ -44,10 +50,11 @@ const Contact = () => {
     },
     aside: {
       ...flex.cc,
-      flex: 2,
+      flex: md ? 2 : 1,
     },
     image: {
       width: '100%',
+      maxWidth: '256px',
       display: 'flex',
       marginBottom: '-2rem',
     },
@@ -72,8 +79,8 @@ const Contact = () => {
         </main>
         <aside css={css.aside}>
           <img css={css.image}
-            src="static/assets/images/mauro_llamar.png"
-            srcSet="static/assets/images/mauro_llamar@2x.png 1.5x"
+            src="https://storage.cloud.google.com/mauro-web-bucket/images/mauro_llamar.png"
+            srcSet="https://storage.cloud.google.com/mauro-web-bucket/images/mauro_llamar@2x.png 1.5x"
             alt="emogi de Mauro llamando"
           />
         </aside>

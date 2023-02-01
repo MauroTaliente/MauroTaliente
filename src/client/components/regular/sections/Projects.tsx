@@ -4,29 +4,43 @@ import ProjectCard from '../../build/organisms/ProjectCard';
 
 const data = [
   {
-    title: 'Daria & Livo',
-    resume: 'La mejor opción para la búsqueda y alquiler de tu nuevo hogar o emprendimiento.',
-    tags: ['comercial', 'front end', 'back end'],
-    onClick: () => {},
-  },
-  {
     title: 'Quiena Inversiones',
-    resume: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus nulla, et enim fugit',
+    resume: 'Ahora invertir en Wall Street está al alcance de todos.',
     tags: ['comercial', 'lead front end'],
+    image: {
+      src: 'https://storage.cloud.google.com/mauro-web-bucket/images/min_quiena.png',
+      srcSet: 'https://storage.cloud.google.com/mauro-web-bucket/images/min_quiena@2x.png 1.5x',
+      alt: 'Daria.com',
+    },
     onClick: () => {},
   },
   {
     title: 'React Style Guides',
-    resume: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus nulla, et enim fugit',
+    resume: 'Crear guías de estilos enfocados en Atomic Design en segundos.',
     tags: ['front end', 'personal'],
+    image: {
+      src: 'https://storage.cloud.google.com/mauro-web-bucket/images/mauro_idea.png',
+      srcSet: 'https://storage.cloud.google.com/mauro-web-bucket/images/mauro_idea@2x.png 1.5x',
+      alt: 'Daria.com',
+    },
+    onClick: () => {},
+  },
+  {
+    title: 'Daria & Livo',
+    resume: 'La mejor opción para la búsqueda y alquiler de tu nuevo hogar o emprendimiento.',
+    tags: ['comercial', 'front end', 'back end'],
+    image: {
+      src: 'https://storage.cloud.google.com/mauro-web-bucket/images/min_daria.png',
+      srcSet: 'https://storage.cloud.google.com/mauro-web-bucket/images/min_daria@2x.png 1.5x',
+      alt: 'Daria.com',
+    },
     onClick: () => {},
   },
 ];
 
-
-const Proyects = () => {
+const Proyects: FC = () => {
   const {
-    theme: { name, colors, fontFamily },
+    theme: { colors, },
     helpers: { styleSheets },
     atoms: { flex, briks, texts },
     state: { mediaFlags: { md } },
@@ -37,34 +51,27 @@ const Proyects = () => {
       ...briks.container,
       label: 'container',
       zIndex: 2,
-      backgroundColor: colors.bgPrimary,
+      backgroundColor: `${colors.bgPrimary}6D`,
     },
     content: {
       ...briks.content,
       label: 'content',
-      flexDirection: md ? 'row' : 'column',
       flexWrap: 'wrap',
       gap: '3em',
     },
-    info: {
-      ...flex.rc,
-      label: 'info',
-      flex: 3,
-    },
-    aside: {
+    header: {
       ...flex.cc,
-      flex: 2,
-    },
-    image: {
-      display: 'flex',
       width: '100%',
     },
   });
 
-  // TODO MISSSING TITLE
   return (
     <section css={styles.container}>
-      <div css={styles.content}>
+      <div id="projects" css={styles.content}>
+        <header css={styles.header}>
+          <p css={texts.d2}>{'Trabajos más relevantes'}</p>
+          <h2 css={texts.h2}>{'Proyectos'}</h2>
+        </header>
         { data.map((x, index) => (
           <ProjectCard
             index={index}
@@ -73,6 +80,7 @@ const Proyects = () => {
             onClick={x.onClick}
             total={data.length}
             resume={x.resume}
+            image={x.image}
             tags={x.tags}
           />
         ))}
