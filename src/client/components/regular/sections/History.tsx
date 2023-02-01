@@ -12,7 +12,7 @@ const History = () => {
   const css = styleSheets({
     main: {
       ...flex.rc,
-      // zIndex: 2,
+      zIndex: 2,
     },
     d2: {
       ...texts.d2,

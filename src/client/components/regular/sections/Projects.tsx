@@ -8,8 +8,8 @@ const data = [
     resume: 'Ahora invertir en Wall Street está al alcance de todos.',
     tags: ['comercial', 'lead front end'],
     image: {
-      src: 'https://storage.cloud.google.com/mauro-web-bucket/images/min_quiena.png',
-      srcSet: 'https://storage.cloud.google.com/mauro-web-bucket/images/min_quiena@2x.png 1.5x',
+      src: 'https://storage.googleapis.com/mauro-web-bucket/images/min_quiena.png',
+      srcSet: 'https://storage.googleapis.com/mauro-web-bucket/images/min_quiena@2x.png 1.5x',
       alt: 'Daria.com',
     },
     onClick: () => {},
@@ -19,8 +19,8 @@ const data = [
     resume: 'Crear guías de estilos enfocados en Atomic Design en segundos.',
     tags: ['front end', 'personal'],
     image: {
-      src: 'https://storage.cloud.google.com/mauro-web-bucket/images/mauro_idea.png',
-      srcSet: 'https://storage.cloud.google.com/mauro-web-bucket/images/mauro_idea@2x.png 1.5x',
+      src: 'https://storage.googleapis.com/mauro-web-bucket/images/mauro_idea.png',
+      srcSet: 'https://storage.googleapis.com/mauro-web-bucket/images/mauro_idea@2x.png 1.5x',
       alt: 'Daria.com',
     },
     onClick: () => {},
@@ -30,8 +30,8 @@ const data = [
     resume: 'La mejor opción para la búsqueda y alquiler de tu nuevo hogar o emprendimiento.',
     tags: ['comercial', 'front end', 'back end'],
     image: {
-      src: 'https://storage.cloud.google.com/mauro-web-bucket/images/min_daria.png',
-      srcSet: 'https://storage.cloud.google.com/mauro-web-bucket/images/min_daria@2x.png 1.5x',
+      src: 'https://storage.googleapis.com/mauro-web-bucket/images/min_daria.png',
+      srcSet: 'https://storage.googleapis.com/mauro-web-bucket/images/min_daria@2x.png 1.5x',
       alt: 'Daria.com',
     },
     onClick: () => {},

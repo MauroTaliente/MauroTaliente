@@ -43,9 +43,9 @@ const Elements: FC<any> = ({ children }) => {
       { children }
       <div css={css.container}>
         <div css={css.content}>
-            <img css={[css.element, css.donut]} src="https://storage.cloud.google.com/mauro-web-bucket/images/mauro_donut.png"/>
-            <img css={[css.element, css.disk]} src="https://storage.cloud.google.com/mauro-web-bucket/images/mauro_disk.png"/>
-            <img css={[css.element, css.ball]} src="https://storage.cloud.google.com/mauro-web-bucket/images/mauro_ball.png"/>
+            <img css={[css.element, css.donut]} src="https://storage.googleapis.com/mauro-web-bucket/images/mauro_donut.png"/>
+            <img css={[css.element, css.disk]} src="https://storage.googleapis.com/mauro-web-bucket/images/mauro_disk.png"/>
+            <img css={[css.element, css.ball]} src="https://storage.googleapis.com/mauro-web-bucket/images/mauro_ball.png"/>
         </div>
       </div>
     </>

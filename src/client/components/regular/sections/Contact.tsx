@@ -79,8 +79,8 @@ const Contact = () => {
         </main>
         <aside css={css.aside}>
           <img css={css.image}
-            src="https://storage.cloud.google.com/mauro-web-bucket/images/mauro_llamar.png"
-            srcSet="https://storage.cloud.google.com/mauro-web-bucket/images/mauro_llamar@2x.png 1.5x"
+            src="https://storage.googleapis.com/mauro-web-bucket/images/mauro_llamar.png"
+            srcSet="https://storage.googleapis.com/mauro-web-bucket/images/mauro_llamar@2x.png 1.5x"
             alt="emogi de Mauro llamando"
           />
         </aside>

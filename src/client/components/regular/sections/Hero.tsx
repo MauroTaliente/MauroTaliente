@@ -57,7 +57,7 @@ const Hero = () => {
     }
   });
 
-  const image = 'https://storage.cloud.google.com/mauro-web-bucket/images/mauro_saludo';
+  const image = 'https://storage.googleapis.com/mauro-web-bucket/images/mauro_saludo';
 
   const applyNextTheme = () => {
     const themeNames = Object.keys(themesFlags);

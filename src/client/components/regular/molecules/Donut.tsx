@@ -43,7 +43,7 @@ const Donut = () => {
       onClick={toggleTheme}
     >
       <img css={donut.image}
-        src={`https://storage.cloud.google.com/mauro-web-bucket/images/${theme.name}_donut.png`}
+        src={`https://storage.googleapis.com/mauro-web-bucket/images/${theme.name}_donut.png`}
         alt="emogi de Mauro saludando"
       />
     </button>

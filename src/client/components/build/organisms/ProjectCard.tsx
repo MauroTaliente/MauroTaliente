@@ -98,7 +98,7 @@ const ProjectCard: FC<ProjectCardProps> = ({
   });
 
   const defaultImage = {
-    src: `https://storage.cloud.google.com/mauro-web-bucket/images/mauro_donut.png`,
+    src: `https://storage.googleapis.com/mauro-web-bucket/images/mauro_donut.png`,
     alt: 'Donut',
   };
 
