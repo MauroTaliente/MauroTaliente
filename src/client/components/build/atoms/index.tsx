@@ -149,7 +149,7 @@ const useAtomsGuilde = (refreshLevel: 0 | 1 = 0) => {
       content: {
         ...flex.rc,
         width: '100%',
-        maxWidth: `${bp.md}px`,
+        maxWidth: `${bp.lg}px`,
         padding: '2rem',
       }
     });

@@ -40,6 +40,7 @@ const ProjectCard: FC<ProjectCardProps> = ({
   const css = styleSheets({
     box: {
       ...flex.rt,
+      width: '100%',
       position: 'relative',
       label: 'content',
       flexDirection: md ? 'row' : 'column',
