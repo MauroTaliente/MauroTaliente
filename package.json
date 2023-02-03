@@ -10,6 +10,7 @@
   "license": "MIT",
   "scripts": {
     "start": "cross-env NODE_ENV=production yarn ts-node ./server",
+    "generate": "vite build --outDir dist/static && yarn build:server && ts-node prerender.ts",
     "dev:server": "nodemon --watch server.ts --watch src/server --exec 'ts-node server.ts'",
     "dev:client": "yarn build:client && vite --config vite.config.ts dev",
     "build": "rimraf dist && tsc -p tsconfig.prod.json && yarn build:client && yarn build:server && yarn copy-files",
