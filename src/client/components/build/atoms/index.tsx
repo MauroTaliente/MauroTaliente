@@ -68,7 +68,7 @@ const useAtomsGuilde = (refreshLevel: 0 | 1 = 0) => {
         justifyContent: 'center',
         alignItems: 'flex-end',
       },
-    }, (s: any) => s);
+    });
 
     const commons = styleSheets({
       hedings: {

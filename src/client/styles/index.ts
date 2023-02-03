@@ -8,7 +8,7 @@ const {
  useStyleGuide,
  StyleGuideProvider,
 } = newStyleGuide({
-  noSsr: { active: true },
+  forceIrr: { active: false },
   breakPoints: { sm: 640, md: 768, lg: 1024, xl: 1280, sl: 1440, ul: 1920 },
   initThemeName: 'mauro',
   root: {
