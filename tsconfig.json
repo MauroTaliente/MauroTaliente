@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "ES2017",
     "module": "ESNext",
-    "moduleResolution": "node",
+    "moduleResolution": "Node",
     "allowJs": true,
     "checkJs": true,
     "jsx": "react-jsxdev",
@@ -20,7 +20,7 @@
     "sourceMap": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "skipLibCheck": true,
-    "outDir": "dist",
+    "outDir": "dist"
   },
   "include": ["src", "types/*", "server.ts", "prerender.ts", "node_modules/vite/types/*"],
   "ts-node": {

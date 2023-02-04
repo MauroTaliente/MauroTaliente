@@ -22,12 +22,12 @@ export default defineConfig({
     }),
   ],
   server: { port: 3000 },
-  build: {
-    minify: false,
-  },
+  clearScreen: false,
+  build: { minify: false },
   esbuild: {
     logOverride: { "this-is-undefined-in-esm": "silent" },
   },
+  base: '/MauroTaliente',
   root: "",
   // @ts-ignore
   test,

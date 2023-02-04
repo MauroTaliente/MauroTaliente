@@ -6,8 +6,7 @@ import { App } from './App';
 // app const.
 const container = document.getElementById('app') as HTMLElement;
 const missingApp = !container?.innerText;
-// dev consts.
-const hotReload = import.meta.hot;
+
 // App compose Strict => Router => CotenteApp.
 const FullApp = () => {
   return (
@@ -19,7 +18,7 @@ const FullApp = () => {
   );
 };
 
-if (hotReload || missingApp) {
+if (missingApp) {
   // build new app.
   // console.log('RENDER');
   const root = createRoot(container!);
