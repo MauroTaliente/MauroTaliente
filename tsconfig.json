@@ -1,32 +1,16 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
+    "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "Node",
     "allowJs": true,
-    "checkJs": true,
     "jsx": "react-jsxdev",
     "jsxImportSource": "@emotion/react",
     "noEmit": true,
     "strict": true,
-    "alwaysStrict": true,
+    "moduleResolution": "node",
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "useUnknownInCatchVariables": false,
-    "forceConsistentCasingInFileNames": true,
-    "declaration": true,
-    "declarationMap": true,
-    "incremental": true,
-    "sourceMap": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "skipLibCheck": true,
-    "outDir": "dist"
+    "useUnknownInCatchVariables": false
   },
-  "include": ["src", "types/*", "server.ts", "prerender.ts", "node_modules/vite/types/*"],
-  "ts-node": {
-    "transpileOnly": true,
-    "compilerOptions": {
-      "module": "CommonJS"
-    }
-  }
+  "include": ["src", "types/*", "node_modules/vite/types/*"],
 }

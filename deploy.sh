@@ -7,7 +7,7 @@ set -e
 npm run generate
 
 # navigate into the build output directory
-cd dist/ssg/
+cd dist/static/
 
 # place .nojekyll to bypass Jekyll processing
 echo > .nojekyll

@@ -1,45 +1,33 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import { createServer as createViteServer } from "vite";
+import { fileURLToPath } from 'url'
 
-const SRC_DIR = './src';
-const SSR_DIR = 'dist/ssr/';
-const SSG_DIR = 'dist/ssg/';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const getRootDir = (p: string) => path.resolve(__dirname, p);
-const getSourceDir = (p: string) => path.join(__dirname, SRC_DIR, p);
-const getSsrPublishDir = (p: string) => path.join(__dirname, SSR_DIR, p);
-const getSsgPublishDir = (p: string) => path.join(__dirname, SSG_DIR, p);
+const dist = (p: any) => path.join(__dirname, 'dist/', p);
+const src = (p: any) => path.join(__dirname, 'src/', p);
 
 async function renderSite() {
-  const vite = await createViteServer({
-    server: { middlewareMode: true },
-    appType: "custom",
-    logLevel: "info",
+  const indexDir = dist("static/index.html");
+  const template = fs.readFileSync(indexDir, "utf-8");
+  const appDir = dist("server/entry-server.js");
+  const render = (await import(appDir)).render;
+
+  const routesDir = src('client/pages');
+  const routesToPrerender = fs.readdirSync(routesDir).map((file) => {
+    const name = file.replace(/\.tsx$/, '').toLowerCase();
+    return name === 'main' ? `/` : `/${name}`;
   });
-  try {
-    const indexDir = getSsrPublishDir("client/index.html");
-    const template = fs.readFileSync(indexDir, "utf-8");
-    const appDir = getSsrPublishDir("server/entry-server.mjs");
-    const { render } = await vite.ssrLoadModule(appDir);
-    const routesDir = getSourceDir('client/pages');
-    const routesToPrerender = fs.readdirSync(routesDir).map((file) => {
-      const name = file.replace(/\.tsx$/, '').toLowerCase();
-      return name === 'main' ? `/` : `/${name}`;
-    });
-    (async () => {
-      // pre-render each route...
-      for (const url of routesToPrerender) {
-        const appHtml = render(url);
-        const html = template.replace(`<!--app-html-->`, appHtml);
-        const filePath = getSsgPublishDir(`${url === '/' ? '/index' : url}.html`);
-        fs.writeFileSync(filePath, html);
-      }
-    })();
-    return;
-  } catch (e: any) {
-    console.log(e.stack);
-  }
+  (async () => {
+    // pre-render each route...
+    for (const url of routesToPrerender) {
+      const appHtml = render(url);
+      const html = template.replace(`<!--app-html-->`, appHtml);
+      const filePath = dist(`static${url === '/' ? '/index' : url}.html`);
+      fs.writeFileSync(filePath, html);
+      console.log('pre-rendered:', filePath);
+    }
+  })();
 }
 
 renderSite();

@@ -57,7 +57,7 @@ const History = () => {
           <a href="https://www.linkedin.com/in/maurotaliente/" target="_blank" rel="noreferrer">
             <Button title='LinkedIn' />
           </a>
-          <a href="static/assets/MauroTalienteCv.pdf" target="_blank" >
+          <a href="/assets/MauroTalienteCv.pdf" target="_blank" >
             <Button title='Descargar CV' />
           </a>
         </footer>
