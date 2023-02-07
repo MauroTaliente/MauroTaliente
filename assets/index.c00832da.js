@@ -9284,6 +9284,21 @@ var __assign = function() {
   };
   return __assign.apply(this, arguments);
 };
+function __rest(s, e2) {
+  var t2 = {};
+  for (var p2 in s)
+    if (Object.prototype.hasOwnProperty.call(s, p2) && e2.indexOf(p2) < 0)
+      t2[p2] = s[p2];
+  if (s != null && typeof Object.getOwnPropertySymbols === "function")
+    for (var i = 0, p2 = Object.getOwnPropertySymbols(s); i < p2.length; i++) {
+      if (e2.indexOf(p2[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p2[i]))
+        t2[p2[i]] = s[p2[i]];
+    }
+  return t2;
+}
+const __$1 = {
+  "@@functional/placeholder": true
+};
 function _isPlaceholder(a) {
   return a != null && typeof a === "object" && a["@@functional/placeholder"] === true;
 }
@@ -10035,6 +10050,10 @@ var toString$1 = /* @__PURE__ */ _curry1(function toString(val) {
   return _toString(val, []);
 });
 const toString$2 = toString$1;
+var curry$1 = /* @__PURE__ */ _curry1(function curry(fn) {
+  return curryN$1(fn.length, fn);
+});
+const curry$2 = curry$1;
 var _Set = /* @__PURE__ */ function() {
   function _Set2() {
     this._nativeSet = typeof Set === "function" ? /* @__PURE__ */ new Set() : null;
@@ -10492,7 +10511,7 @@ var Actions;
   Actions2[Actions2["THEME"] = 0] = "THEME";
   Actions2[Actions2["GUIDE"] = 1] = "GUIDE";
 })(Actions || (Actions = {}));
-var toString2 = toString$2, equals2 = equals$2, map2 = map$2, whereEq2 = whereEq$2, keys3 = keys$2, values2 = values$2, reduce = reduce$2, mergeDeepRight2 = mergeDeepRight$2, includes = includes$2, all2 = all$2, type2 = type$2, is2 = is$2, intersection2 = intersection$2, find2 = find$2, findIndex2 = findIndex$2, last = last$2, or2 = or$2;
+var toString2 = toString$2, equals2 = equals$2, map2 = map$2, whereEq2 = whereEq$2, keys3 = keys$2, values2 = values$2, reduce = reduce$2, mergeDeepRight2 = mergeDeepRight$2, includes = includes$2, all2 = all$2, type2 = type$2, is2 = is$2, intersection2 = intersection$2, find2 = find$2, findIndex2 = findIndex$2, last = last$2, curry2 = curry$2, or2 = or$2, __ = __$1;
 var IS_SSR = typeof document === "undefined";
 if (IS_SSR) {
   React.useLayoutEffect = React.useEffect;
@@ -10634,6 +10653,11 @@ var getInitConfig = function(init) {
   var empty = {
     breakPoints: {},
     initThemeName: "",
+    styles: {
+      mode: "simple",
+      overlap: true,
+      literal: false
+    },
     root: {
       colors: {},
       fontFamily: {}
@@ -10661,28 +10685,40 @@ var getInitConfig = function(init) {
   verifyScheme(breakPoints, Object, VERIFY.TY);
   verifyScheme(breakPoints, Number, VERIFY.VALUES_TY_IN_ARR);
   var mq = createMediaQueries(breakPoints);
-  var mqCss = function(rule) {
+  var _a = mergeDeepRight2(empty.styles, init.styles || {}), sMode = _a.mode, sOpt = __rest(_a, ["mode"]);
+  var facepaintCss = function(rule, options) {
+    if (options === void 0) {
+      options = sOpt;
+    }
     var format = map2(function(point) {
       return point;
     })(values2(mq));
-    var build = index(format);
+    var build = index(format, options);
     return css(build(rule));
   };
   var siCss = function(rule) {
     return rule;
   };
-  var styleSheets = function(rules, mode) {
+  var styleSheets = function(rules, mode, options) {
+    if (mode === void 0) {
+      mode = sMode;
+    }
+    if (options === void 0) {
+      options = sOpt;
+    }
     var process = function() {
-      if (mode === "media")
-        return mqCss;
+      if (mode === "facepaint") {
+        var mqCssReady = curry2(facepaintCss)(__, options);
+        return mqCssReady;
+      }
       return siCss;
     }();
     return reduce(function(pre, key) {
-      var _a;
-      return mergeDeepRight2(pre, (_a = {}, _a[key] = process(rules[key]), _a));
+      var _a2;
+      return mergeDeepRight2(pre, (_a2 = {}, _a2[key] = process(rules[key]), _a2));
     }, {})(keys3(rules));
   };
-  var root = mergeDeepRight2(init.root, empty.root);
+  var root = mergeDeepRight2(empty.root, init.root);
   verifyScheme(root, Object, VERIFY.TY);
   verifyScheme(root, empty.root, VERIFY.KEYS_IN_KEYS);
   verifyScheme(root.colors, String, VERIFY.VALUES_TY_IN_ARR);
@@ -10699,14 +10735,14 @@ var getInitConfig = function(init) {
     verifyScheme(x2.fontFamily, String, VERIFY.VALUES_TY_IN_ARR);
   })(themes);
   var initThemeName = init.initThemeName || init.themes[0].name || empty.initThemeName;
-  var themesNames = map2(function(_a) {
-    var name = _a.name;
+  var themesNames = map2(function(_a2) {
+    var name = _a2.name;
     return name;
   })(themes);
   verifyScheme(initThemeName, themesNames, VERIFY.KEY_IN_ARR);
   verifyScheme(themesNames, scheme.name, VERIFY.EQ, true);
-  var theme = find2(function(_a) {
-    var name = _a.name;
+  var theme = find2(function(_a2) {
+    var name = _a2.name;
     return name === initThemeName;
   })(themes) || empty.theme;
   return {
@@ -10716,7 +10752,7 @@ var getInitConfig = function(init) {
     themes,
     helpers: {
       mq,
-      mqCss,
+      facepaintCss,
       styleSheets
     }
   };
@@ -10748,7 +10784,7 @@ var getProvider = function(forceIrr, BaseProvider) {
   } : BaseProvider;
   return StyleGuideProvider2;
 };
-function createStyleGuide(config) {
+var createStyleGuide = function(config) {
   var initGuide = getInitConfig(config);
   var _a = newContext({
     name: "StyleGuide",
@@ -10804,10 +10840,44 @@ function createStyleGuide(config) {
     StyleGuideProvider: StyleGuideProvider2,
     useStyleGuide: useStyleGuide2
   };
-}
+};
+const scope = {
+  name: "scope",
+  tags: ["light", "rounded", "clean"],
+  colors: {
+    acent: "#FFFFFD",
+    primary: "#FFFFFD",
+    secondary: "#A8A7AC",
+    ngAcent: "#29282D",
+    bgPrimary: "#29282D",
+    bgSecondary: "#1b1b1e"
+  },
+  fontFamily: {
+    display: "IBM Plex Mono",
+    body: "IBM Plex Mono",
+    element: "IBM Plex Mono"
+  }
+};
+const formal = {
+  name: "formal",
+  tags: ["light", "clean"],
+  colors: {
+    acent: "#ff4e30",
+    primary: "#020202",
+    secondary: "#747474",
+    ngAcent: "#f0f0f0",
+    bgPrimary: "#f0f0f0",
+    bgSecondary: "#ffffff"
+  },
+  fontFamily: {
+    display: "Playfair Display",
+    body: "IBM Plex Sans",
+    element: "IBM Plex Sans"
+  }
+};
 const mauro = {
   name: "mauro",
-  tags: ["light"],
+  tags: ["dark"],
   colors: {
     acent: "#9D84B8",
     primary: "#FFFFFD",
@@ -10826,7 +10896,7 @@ const fabi = {
   name: "fabi",
   tags: ["light", "rounded"],
   colors: {
-    acent: "#57A0F6",
+    acent: "#885cb7",
     primary: "#29233B",
     secondary: "#4E4763",
     ngAcent: "#F8F8FA",
@@ -10843,7 +10913,10 @@ const {
   useStyleGuide,
   StyleGuideProvider
 } = createStyleGuide({
-  forceIrr: true,
+  forceIrr: false,
+  styles: {
+    mode: "facepaint"
+  },
   breakPoints: {
     sm: 640,
     md: 768,
@@ -10852,23 +10925,24 @@ const {
     sl: 1440,
     ul: 1920
   },
-  initThemeName: "mauro",
+  initThemeName: "scope",
   root: {
     colors: {
-      color: "#eaeaea"
+      primary: "#eaeaea"
     },
     fontFamily: {
-      display: `'Lato', sans-serif;'`
+      display: "'Lato', sans-serif'"
     }
   },
   scheme: {
-    name: ["mauro", "fabi"],
-    tags: ["dark", "light", "small", "rounded"],
+    name: ["mauro", "fabi", "formal", "scope"],
+    tags: ["dark", "light", "clean", "rounded"],
     colors: ["acent", "primary", "secondary", "ngAcent", "bgPrimary", "bgSecondary"],
     fontFamily: ["display", "body", "element"]
   },
-  themes: [mauro, fabi]
+  themes: [mauro, fabi, formal, scope]
 });
+const assets = (p2 = "") => "https://storage.googleapis.com/mauro-web-bucket/" + p2;
 const useAtomsGuilde = (refreshLevel = 0) => {
   const styleGuide = useStyleGuide(refreshLevel);
   const {
@@ -10879,11 +10953,6 @@ const useAtomsGuilde = (refreshLevel = 0) => {
     },
     helpers: {
       styleSheets
-    },
-    state: {
-      tagsFlags: {
-        small
-      }
     }
   } = styleGuide;
   const atomsGuide = react.exports.useMemo(() => {
@@ -10942,22 +11011,22 @@ const useAtomsGuilde = (refreshLevel = 0) => {
         justifyContent: "center",
         alignItems: "flex-end"
       }
-    });
+    }, "simple");
     const commons = styleSheets({
       hedings: {
         fontWeight: 500,
         fontFamily: fontFamily.display,
         color: colors.primary,
-        lineHeight: "1.35em",
+        lineHeight: "1.25em",
         whiteSpace: "pre-line"
       },
       texts: {
         fontWeight: 300,
         fontFamily: fontFamily.body,
         color: colors.secondary,
-        lineHeight: "1.35em"
+        lineHeight: "1.5em"
       }
-    });
+    }, "simple");
     const texts = styleSheets({
       h1: {
         ...commons.hedings,
@@ -10986,11 +11055,11 @@ const useAtomsGuilde = (refreshLevel = 0) => {
       },
       b1: {
         ...commons.texts,
-        fontSize: small ? "1.2em" : "1.5em"
+        fontSize: "1.5em"
       },
       b2: {
         ...commons.texts,
-        fontSize: small ? "1em" : "1.2em"
+        fontSize: "1.2em"
       },
       d1: {
         ...commons.texts,
@@ -11011,7 +11080,7 @@ const useAtomsGuilde = (refreshLevel = 0) => {
         fontSize: "1em",
         textDecoration: "underline"
       }
-    });
+    }, "facepaint");
     const briks = styleSheets({
       container: {
         ...flex.cc,
@@ -11023,7 +11092,7 @@ const useAtomsGuilde = (refreshLevel = 0) => {
         maxWidth: `${bp.lg}px`,
         padding: "2rem"
       }
-    });
+    }, "simple");
     return {
       ...styleGuide,
       atoms: {
@@ -11035,112 +11104,31 @@ const useAtomsGuilde = (refreshLevel = 0) => {
   }, [styleGuide]);
   return atomsGuide;
 };
-const Hero = () => {
+const WarningWork = () => {
   const {
-    theme: {
-      name,
-      colors
-    },
-    helpers: {
-      styleSheets,
-      setTheme
-    },
     atoms: {
       flex,
-      briks,
       texts
     },
-    state: {
-      themesFlags,
-      mediaFlags: {
-        md: md2
-      }
+    helpers: {
+      styleSheets
+    },
+    theme: {
+      colors
     }
-  } = useAtomsGuilde(1);
-  const css2 = styleSheets({
-    container: {
-      ...briks.container,
-      label: "container",
-      zIndex: 2,
-      backgroundColor: `${colors.bgSecondary}30`
-    },
-    content: {
-      ...briks.content,
-      alignItems: "flex-end",
-      label: "content",
-      flexDirection: md2 ? "row" : "column"
-    },
-    hola: {
-      ...flex.rc,
-      label: "hola",
-      flex: 4
-    },
-    h1: {
-      ...texts.h1,
-      label: "hola",
-      paddingBottom: "1rem",
-      cursor: "pointer"
-    },
-    b1: {
-      ...texts.b1,
-      label: "info",
-      paddingBottom: "1rem"
-    },
-    mauro: {
-      ...flex.cc,
-      label: "mauro",
-      display: "flex",
-      flex: 3,
-      marginBottom: "-2rem",
-      position: "relative",
-      overflow: "hidden"
-    },
-    image: {
-      objectFit: "cover",
+  } = useAtomsGuilde();
+  const styles = styleSheets({
+    box: [flex.cc, {
       width: "100%",
-      height: "100%"
-    }
+      padding: "1em",
+      borderBottom: `1px solid ${colors.acent}`
+    }]
   });
-  const image = "https://storage.googleapis.com/mauro-web-bucket/images/mauro_saludo";
-  const applyNextTheme = () => {
-    const themeNames = Object.keys(themesFlags);
-    const lastIndex = themeNames.length - 1;
-    const currentIndex = themeNames.findIndex((x2) => x2 === name);
-    const selectIndex = lastIndex === currentIndex ? 0 : currentIndex + 1;
-    const selectName = themeNames[selectIndex];
-    setTheme(selectName);
-  };
-  return /* @__PURE__ */ jsx("section", {
-    css: css2.container,
-    children: /* @__PURE__ */ jsxs("div", {
-      css: css2.content,
-      children: [/* @__PURE__ */ jsxs("main", {
-        css: css2.hola,
-        children: [/* @__PURE__ */ jsx("h1", {
-          css: css2.h1,
-          onClick: applyNextTheme,
-          children: `Hola \u{1F44B},
-            soy Mauro.`
-        }), /* @__PURE__ */ jsx("h4", {
-          css: css2.b1,
-          children: `Sr FrontEnd Developer 
-            con m\xE1s de 8 a\xF1os de experiencia
-            y conocimiento de JavaScript, 
-            React & Native, Node.js etc.`
-        }), /* @__PURE__ */ jsx("a", {
-          css: texts.a,
-          href: "mailto:mauro.taliente3@gmail.com",
-          children: `\u{1F918} Disponible para trabajar`
-        })]
-      }), /* @__PURE__ */ jsx("aside", {
-        css: css2.mauro,
-        children: /* @__PURE__ */ jsx("img", {
-          css: css2.image,
-          src: `${image}.png`,
-          srcSet: `${image}@2x.png 1.5x`,
-          alt: "emogi de Mauro saludando"
-        })
-      })]
+  return /* @__PURE__ */ jsx("div", {
+    css: styles.box,
+    children: /* @__PURE__ */ jsx("h5", {
+      css: texts.b2,
+      children: "Estoy trabajando en el siti\xF3, en un par de d\xEDas estar\xE1 listo \u26A0\uFE0F"
     })
   });
 };
@@ -11173,51 +11161,125 @@ const SimplePage = ({
     };
   }, [rootBgColor]);
   const main = styleSheets({
-    container: {
+    container: [flex.ct, {
+      minWidth: "100%",
       minHeight: "100vh",
       backgroundColor: rootBgColor
-    }
+    }]
   });
   return /* @__PURE__ */ jsx("div", {
-    css: [flex.ct, main.container, "", ""],
+    css: main.container,
     children
   });
 };
-const WarningWork = () => {
+const getData = (clean) => ({
+  title: `Hola \u{1F44B},
+  soy Mauro.`,
+  about: `Sr FrontEnd Developer 
+  con m\xE1s de 8 a\xF1os de experiencia
+  y conocimiento de JavaScript, 
+  React & Native, Node.js etc.`,
+  button: {
+    label: "\u{1F918} Disponible para trabajar",
+    href: "mailto:mauro.taliente3@gmail.com"
+  },
+  image: {
+    src: assets(clean ? "images/mauro-white.png" : "images/mauro_saludo.png"),
+    srcSet: assets(clean ? "images/mauro-white@2x.png 1.5x" : "images/mauro_saludo@2x.png 1.5x"),
+    alt: "emogi de Mauro saludando"
+  }
+});
+const Hero = () => {
   const {
-    atoms: {
-      flex,
-      texts
+    theme: {
+      name,
+      colors
     },
     helpers: {
-      styleSheets
+      styleSheets,
+      setTheme
     },
-    theme: {
-      colors,
-      fontFamily
+    atoms: {
+      flex,
+      briks,
+      texts
     },
     state: {
+      themesFlags,
       tagsFlags: {
-        rounded
+        clean
       }
     }
-  } = useAtomsGuilde(0);
-  const styles = styleSheets({
-    box: {
-      ...flex.cc,
+  } = useAtomsGuilde(1);
+  const css2 = styleSheets({
+    container: [briks.container, {
+      zIndex: 2,
+      backgroundColor: `${colors.bgSecondary}30`
+    }],
+    content: [briks.content, {
+      alignItems: "flex-end",
+      label: "content",
+      flexDirection: ["column", "row"]
+    }],
+    hola: [flex.rc, {
+      flex: 4,
+      cursor: "pointer"
+    }],
+    h1: [texts.h1, {
+      paddingBottom: "1rem"
+    }],
+    b1: [texts.b1, {
+      paddingBottom: "1rem"
+    }],
+    mauro: [flex.cc, {
+      display: "flex",
+      flex: 3,
+      marginBottom: "-2rem",
+      position: "relative",
+      overflow: "hidden"
+    }],
+    image: {
+      objectFit: "contain",
       width: "100%",
-      padding: "1em",
-      borderBottom: `1px solid ${colors.acent}`
-    },
-    message: {
-      ...texts.b2
+      height: "100%",
+      maxHeight: "410px"
     }
   });
-  return /* @__PURE__ */ jsx("div", {
-    css: styles.box,
-    children: /* @__PURE__ */ jsx("h5", {
-      css: styles.message,
-      children: `Estoy trabajando en el siti\xF3, en un par de d\xEDas estar\xE1 listo \u26A0\uFE0F`
+  const applyNextTheme = () => {
+    const themeNames = Object.keys(themesFlags);
+    const lastIndex = themeNames.length - 1;
+    const currentIndex = themeNames.findIndex((x2) => x2 === name);
+    const selectIndex = lastIndex === currentIndex ? 0 : currentIndex + 1;
+    const selectName = themeNames[selectIndex];
+    setTheme(selectName);
+  };
+  const data2 = getData(clean);
+  return /* @__PURE__ */ jsx("section", {
+    css: css2.container,
+    children: /* @__PURE__ */ jsxs("div", {
+      css: css2.content,
+      children: [/* @__PURE__ */ jsxs("main", {
+        css: css2.hola,
+        role: "button",
+        onClick: applyNextTheme,
+        children: [/* @__PURE__ */ jsx("h1", {
+          css: css2.h1,
+          children: data2.title
+        }), /* @__PURE__ */ jsx("h4", {
+          css: css2.b1,
+          children: data2.about
+        }), /* @__PURE__ */ jsx("a", {
+          css: texts.a,
+          href: data2.button.href,
+          children: data2.button.label
+        })]
+      }), /* @__PURE__ */ jsx("aside", {
+        css: css2.mauro,
+        children: /* @__PURE__ */ jsx("img", {
+          css: css2.image,
+          ...data2.image
+        })
+      })]
     })
   });
 };
@@ -11228,7 +11290,8 @@ const Button = ({
   left = null,
   right = null,
   children = null,
-  onClick = void 0
+  onClick,
+  style
 }) => {
   const {
     atoms: {
@@ -11257,8 +11320,7 @@ const Button = ({
     sec: type3 == "secondary"
   };
   const styles = styleSheets({
-    box: {
-      ...flex.cc,
+    box: [flex.cc, {
       flexDirection: "row",
       label: "button",
       cursor: "pointer",
@@ -11272,7 +11334,7 @@ const Button = ({
       "&: hover": {
         backgroundColor: `${colors.acent}9D`
       }
-    }
+    }, style]
   });
   return /* @__PURE__ */ jsxs("button", {
     css: styles.box,
@@ -11318,11 +11380,18 @@ const Tag = ({
       borderRadius: "1em"
     }
   });
-  return /* @__PURE__ */ jsx("span", {
+  return /* @__PURE__ */ jsx("button", {
     css: styles.box,
     onClick,
     children: title
   });
+};
+const data$6 = {
+  button: "Ver m\xE1s",
+  image: {
+    src: assets("/images/mauro_donut.png"),
+    alt: "Donut"
+  }
 };
 const ProjectCard = ({
   index: index2,
@@ -11335,41 +11404,33 @@ const ProjectCard = ({
 }) => {
   const {
     theme: {
-      name,
-      colors,
-      fontFamily
-    },
-    helpers: {
-      styleSheets
+      colors
     },
     atoms: {
       flex,
-      briks,
       texts
     },
     state: {
-      mediaFlags: {
-        md: md2
-      },
       tagsFlags: {
         rounded
       }
+    },
+    helpers: {
+      styleSheets
     }
-  } = useAtomsGuilde(1);
+  } = useAtomsGuilde();
   const css2 = styleSheets({
-    box: {
-      ...flex.rt,
+    box: [flex.rt, {
       width: "100%",
       position: "relative",
-      label: "content",
-      flexDirection: md2 ? "row" : "column",
+      flexDirection: ["column", "row"],
       flexWrap: "wrap",
       gap: "2em",
       backgroundColor: rounded ? colors.bgPrimary : "transparent",
       border: rounded ? `1px solid ${colors.secondary}30` : "none",
       padding: rounded ? "1em 2em" : 0,
       borderRadius: rounded ? "0.5em" : 0
-    },
+    }],
     line: {
       display: index2 + 1 === total || rounded ? "none" : "flex",
       position: "absolute",
@@ -11379,47 +11440,37 @@ const ProjectCard = ({
       left: "calc(50% - 3em)",
       bottom: "-1.5em"
     },
-    info: {
-      ...flex.rc,
-      label: "info",
+    info: [flex.rc, {
       flex: 3
-    },
-    counter: {
-      ...texts.h4,
+    }],
+    counter: [texts.h4, {
+      display: "flex",
       "small": {
         fontSize: "0.7em"
       }
-    },
-    title: {
-      ...texts.h3,
+    }],
+    title: [texts.h3, {
       paddingBottom: "0.5rem"
-    },
-    tags: {
-      ...flex.cc,
+    }],
+    tags: [flex.cc, {
       paddingBottom: "0.5rem",
       flexDirection: "row",
       gap: "0.5em"
-    },
-    resume: {
-      ...texts.b2,
+    }],
+    resume: [texts.b2, {
       paddingBottom: "0.75rem"
-    },
-    aside: {
-      ...flex.cc,
+    }],
+    aside: [flex.cc, {
       flex: 2,
       borderRadius: "1em",
       backgroundColor: colors.ngAcent
-    },
+    }],
     image: {
       display: "flex",
       width: "100%",
       maxWidth: "256px"
     }
   });
-  const defaultImage = {
-    src: `https://storage.googleapis.com/mauro-web-bucket/images/mauro_donut.png`,
-    alt: "Donut"
-  };
   return /* @__PURE__ */ jsxs("div", {
     css: css2.box,
     children: [/* @__PURE__ */ jsxs("main", {
@@ -11441,53 +11492,58 @@ const ProjectCard = ({
         css: css2.resume,
         children: resume
       }), /* @__PURE__ */ jsx(Button, {
-        title: "Ver m\xE1s"
+        title: data$6.button,
+        onClick
       })]
     }), /* @__PURE__ */ jsx("aside", {
       css: css2.aside,
       children: /* @__PURE__ */ jsx("img", {
         css: css2.image,
-        ...image || defaultImage
+        ...image || data$6.image
       })
     }), /* @__PURE__ */ jsx("span", {
       css: css2.line
     })]
   });
 };
-const data = [{
-  title: "Quiena Inversiones",
-  resume: "Ahora invertir en Wall Street est\xE1 al alcance de todos.",
-  tags: ["comercial", "lead front end"],
-  image: {
-    src: "https://storage.googleapis.com/mauro-web-bucket/images/min_quiena.png",
-    srcSet: "https://storage.googleapis.com/mauro-web-bucket/images/min_quiena@2x.png 1.5x",
-    alt: "Daria.com"
-  },
-  onClick: () => {
-  }
-}, {
-  title: "React Style Guides",
-  resume: "Crear gu\xEDas de estilos enfocados en Atomic Design en segundos.",
-  tags: ["front end", "personal"],
-  image: {
-    src: "https://storage.googleapis.com/mauro-web-bucket/images/mauro_idea.png",
-    srcSet: "https://storage.googleapis.com/mauro-web-bucket/images/mauro_idea@2x.png 1.5x",
-    alt: "Daria.com"
-  },
-  onClick: () => {
-  }
-}, {
-  title: "Daria & Livo",
-  resume: "La mejor opci\xF3n para la b\xFAsqueda y alquiler de tu nuevo hogar o emprendimiento.",
-  tags: ["comercial", "front end", "back end"],
-  image: {
-    src: "https://storage.googleapis.com/mauro-web-bucket/images/min_daria.png",
-    srcSet: "https://storage.googleapis.com/mauro-web-bucket/images/min_daria@2x.png 1.5x",
-    alt: "Daria.com"
-  },
-  onClick: () => {
-  }
-}];
+const data$5 = {
+  title: "Trabajos m\xE1s relevantes",
+  subtitle: "Proyectos",
+  proyects: [{
+    title: "Quiena Inversiones",
+    resume: "Ahora invertir en Wall Street est\xE1 al alcance de todos.",
+    tags: ["comercial", "lead front end"],
+    image: {
+      src: assets("images/min_quiena.png"),
+      srcSet: assets("images/min_quiena@2x.png 1.5x"),
+      alt: "Daria.com"
+    },
+    onClick: () => {
+    }
+  }, {
+    title: "React Style Guides",
+    resume: "Crear gu\xEDas de estilos enfocados en Atomic Design en segundos.",
+    tags: ["front end", "personal"],
+    image: {
+      src: assets("images/mauro_idea.png"),
+      srcSet: assets("images/mauro_idea@2x.png 1.5x"),
+      alt: "Daria.com"
+    },
+    onClick: () => {
+    }
+  }, {
+    title: "Daria & Livo",
+    resume: "La mejor opci\xF3n para la b\xFAsqueda y alquiler de tu nuevo hogar o emprendimiento.",
+    tags: ["comercial", "front end", "back end"],
+    image: {
+      src: assets("images/min_daria.png"),
+      srcSet: assets("images/min_daria@2x.png 1.5x"),
+      alt: "Daria.com"
+    },
+    onClick: () => {
+    }
+  }]
+};
 const Proyects = () => {
   const {
     theme: {
@@ -11500,30 +11556,20 @@ const Proyects = () => {
       flex,
       briks,
       texts
-    },
-    state: {
-      mediaFlags: {
-        md: md2
-      }
     }
-  } = useAtomsGuilde(1);
+  } = useAtomsGuilde();
   const styles = styleSheets({
-    container: {
-      ...briks.container,
-      label: "container",
+    container: [briks.container, {
       zIndex: 2,
       backgroundColor: `${colors.bgPrimary}6D`
-    },
-    content: {
-      ...briks.content,
-      label: "content",
+    }],
+    content: [briks.content, {
       flexWrap: "wrap",
       gap: "3em"
-    },
-    header: {
-      ...flex.cc,
+    }],
+    header: [flex.cc, {
       width: "100%"
-    }
+    }]
   });
   return /* @__PURE__ */ jsx("section", {
     css: styles.container,
@@ -11534,22 +11580,36 @@ const Proyects = () => {
         css: styles.header,
         children: [/* @__PURE__ */ jsx("p", {
           css: texts.d2,
-          children: "Trabajos m\xE1s relevantes"
+          children: data$5.title
         }), /* @__PURE__ */ jsx("h2", {
           css: texts.h2,
-          children: "Proyectos"
+          children: data$5.subtitle
         })]
-      }), data.map((x2, index2) => /* @__PURE__ */ jsx(ProjectCard, {
+      }), data$5.proyects.map((x2, index2) => /* @__PURE__ */ jsx(ProjectCard, {
         index: index2,
         title: x2.title,
         onClick: x2.onClick,
-        total: data.length,
+        total: data$5.proyects.length,
         resume: x2.resume,
         image: x2.image,
         tags: x2.tags
       }, x2.title))]
     })
   });
+};
+const data$4 = {
+  title: "Curriculum",
+  subtitle: "un poco m\xE1s sobre m\xED",
+  about: `He liderado equipos FrontEnd en aplicaciones web y nativas para la industria TechEd, PropTech y Fintech.
+    Apasionado por la tecnolog\xEDa y de formaci\xF3n autodidacta, disfruto mucho resolver, aprender y encontrar soluciones a los desaf\xEDos del d\xEDa a d\xEDa.`,
+  linkdin: {
+    href: "https://www.linkedin.com/in/maurotaliente/",
+    button: "LinkedIn"
+  },
+  curriculum: {
+    href: "/assets/MauroTalienteCv.pdf",
+    button: "Descargar CV"
+  }
 };
 const History = () => {
   const {
@@ -11564,34 +11624,28 @@ const History = () => {
     helpers: {
       styleSheets
     }
-  } = useAtomsGuilde(0);
+  } = useAtomsGuilde();
   const css2 = styleSheets({
-    main: {
-      ...flex.rc
-    },
-    d2: {
-      ...texts.d2,
+    main: flex.rc,
+    d2: [texts.d2, {
       paddingBottom: "1em"
-    },
-    d1: {
-      ...texts.d1,
+    }],
+    d1: [texts.d1, {
       paddingBottom: "1em"
-    },
-    h4: {
-      ...texts.h4,
-      paddingBottom: "1rem",
+    }],
+    h4: [texts.b1, {
+      paddingBottom: "1.5rem",
       color: colors.acent,
-      lineHeight: "2em"
-    },
-    b1: {
-      ...texts.b1,
+      lineHeight: "1.5em",
+      fontWeight: 400
+    }],
+    b1: [texts.b1, {
       paddingBottom: "1rem"
-    },
-    footer: {
-      ...flex.lt,
+    }],
+    footer: [flex.lt, {
       flexDirection: "row",
       gap: "1em"
-    }
+    }]
   });
   return /* @__PURE__ */ jsx("section", {
     css: briks.container,
@@ -11601,34 +11655,47 @@ const History = () => {
         css: css2.main,
         children: [/* @__PURE__ */ jsx("h5", {
           css: css2.d2,
-          children: `Curriculum`
+          children: data$4.title
         }), /* @__PURE__ */ jsx("h4", {
           css: css2.d1,
-          children: `un poco m\xE1s sobre m\xED`
+          children: data$4.subtitle
         }), /* @__PURE__ */ jsx("p", {
           css: css2.h4,
-          children: `He liderado equipos FrontEnd en aplicaciones web y nativas para la industria TechEd, PropTech y Fintech.
-            Apasionado por la tecnolog\xEDa y de formaci\xF3n autodidacta, disfruto mucho resolver, aprender y encontrar soluciones a los desaf\xEDos del d\xEDa a d\xEDa.`
+          children: data$4.about
         })]
       }), /* @__PURE__ */ jsxs("footer", {
         css: css2.footer,
         children: [/* @__PURE__ */ jsx("a", {
-          href: "https://www.linkedin.com/in/maurotaliente/",
+          href: data$4.linkdin.href,
           target: "_blank",
           rel: "noreferrer",
           children: /* @__PURE__ */ jsx(Button, {
-            title: "LinkedIn"
+            title: data$4.linkdin.button
           })
         }), /* @__PURE__ */ jsx("a", {
-          href: "/assets/MauroTalienteCv.pdf",
+          href: data$4.curriculum.href,
           target: "_blank",
+          rel: "noreferrer",
           children: /* @__PURE__ */ jsx(Button, {
-            title: "Descargar CV"
+            title: data$4.curriculum.button
           })
         })]
       })]
     })
   });
+};
+const data$3 = {
+  title: "Contacto",
+  text: "\xBFEstas creando un proyecto, necesitas asesor\xEDa o simplemente quieres enviar un saludo?",
+  email: {
+    href: "mailto:mauro.taliente3@gmail.com",
+    title: "mauro.taliente3@gmail.com"
+  },
+  image: {
+    src: assets("images/mauro_llamar.png"),
+    srcSet: assets("images/mauro_llamar@2x.png 1.5x"),
+    alt: "emogi de Mauro llamando"
+  }
 };
 const Contact = () => {
   const {
@@ -11643,55 +11710,38 @@ const Contact = () => {
     state: {
       tagsFlags: {
         rounded
-      },
-      mediaFlags: {
-        md: md2
       }
     },
     helpers: {
       styleSheets
     }
-  } = useAtomsGuilde(1);
+  } = useAtomsGuilde();
   const css2 = styleSheets({
-    card: {
-      ...flex.rb,
+    card: [flex.cc, {
       width: "100%",
-      padding: md2 ? "2em" : "2em 1em",
-      flexDirection: md2 ? "row" : "column",
+      padding: ["2em 1em", "2em"],
+      flexDirection: ["column", "row"],
       backgroundColor: colors.bgPrimary,
       border: `1px solid ${colors.acent}`,
       borderRadius: rounded ? "1em" : "0.5em",
       zIndex: 2
-    },
-    main: {
+    }],
+    main: [flex.rc, {
       width: "100%",
-      ...flex.rc,
-      flex: md2 ? 3 : 1
-    },
-    label: {
-      ...texts.d2,
+      flex: [1, 3]
+    }],
+    label: [texts.d2, {
       paddingBottom: "1em"
-    },
-    email: {
-      ...md2 ? texts.h4 : texts.h5,
-      paddingBottom: "1rem",
-      color: colors.acent,
-      lineHeight: "2em"
-    },
-    text: {
-      ...texts.h5,
-      paddingBottom: "1rem",
-      lineHeight: "2em"
-    },
-    footer: {
-      ...flex.lt,
-      flexDirection: "row",
-      gap: "1em"
-    },
-    aside: {
-      ...flex.cc,
-      flex: md2 ? 2 : 1
-    },
+    }],
+    email: [texts.h4, {
+      color: colors.acent
+    }],
+    text: [texts.b1, {
+      paddingBottom: "1rem"
+    }],
+    aside: [flex.cc, {
+      flex: [1, 2]
+    }],
     image: {
       width: "100%",
       maxWidth: "256px",
@@ -11709,28 +11759,27 @@ const Contact = () => {
           css: css2.main,
           children: [/* @__PURE__ */ jsx("h5", {
             css: css2.label,
-            children: `Contacto`
+            children: data$3.title
           }), /* @__PURE__ */ jsx("h3", {
             css: css2.text,
-            children: `\xBFEstas creando un proyecto, necesitas asesor\xEDa o simplemente quieres enviar un saludo?`
+            children: data$3.text
           }), /* @__PURE__ */ jsx("a", {
             css: css2.email,
-            href: "mailto:mauro.taliente3@gmail.com",
-            children: `mauro.taliente3@gmail.com`
+            href: data$3.email.href,
+            children: data$3.email.title
           })]
         }), /* @__PURE__ */ jsx("aside", {
           css: css2.aside,
           children: /* @__PURE__ */ jsx("img", {
             css: css2.image,
-            src: "https://storage.googleapis.com/mauro-web-bucket/images/mauro_llamar.png",
-            srcSet: "https://storage.googleapis.com/mauro-web-bucket/images/mauro_llamar@2x.png 1.5x",
-            alt: "emogi de Mauro llamando"
+            ...data$3.image
           })
         })]
       })
     })
   });
 };
+const data$2 = "Copyrigth \xA9 2023. Mauro Taliente. Todos los derechos reservados";
 const Fotter = () => {
   const {
     theme: {
@@ -11741,77 +11790,85 @@ const Fotter = () => {
       briks,
       texts
     },
-    state: {
-      tagsFlags: {
-        rounded
-      }
-    },
     helpers: {
       styleSheets
     }
-  } = useAtomsGuilde(0);
-  const css2 = styleSheets({
-    container: {
-      ...briks.container,
+  } = useAtomsGuilde();
+  const styles = styleSheets({
+    container: [briks.container, {
       backgroundColor: colors.bgPrimary,
       zIndex: 2
-    },
-    label: {
-      ...texts.d2
-    }
+    }],
+    content: [briks.content, flex.cc]
   });
   return /* @__PURE__ */ jsx("section", {
-    css: css2.container,
+    css: styles.container,
     children: /* @__PURE__ */ jsx("div", {
-      css: briks.content,
+      css: styles.content,
       children: /* @__PURE__ */ jsx("h5", {
-        css: css2.label,
-        children: `Copyrigth \xA9 2023. Mauro Taliente. Todos los derechos reservados`
+        css: texts.d2,
+        children: data$2
       })
     })
   });
+};
+const data$1 = {
+  donut: {
+    src: assets("images/mauro_donut.png"),
+    alt: "donut violeta"
+  },
+  disk: {
+    src: assets("images/mauro_disk.png"),
+    alt: "disco violeta"
+  },
+  ball: {
+    src: assets("images/mauro_ball.png"),
+    alt: "bola violeta"
+  }
 };
 const Elements = ({
   children
 }) => {
   const {
     breakPoints: bp,
-    theme: {
-      colors
+    atoms: {
+      flex
     },
     helpers: {
       styleSheets
     },
-    atoms: {
-      flex,
-      briks,
-      texts
+    state: {
+      tagsFlags: {
+        light,
+        clean
+      }
     }
   } = useAtomsGuilde(0);
   const css2 = styleSheets({
-    container: {
-      ...briks.container,
+    container: [flex.cc, {
       position: "fixed",
+      width: "100%",
       height: "100vh",
       zIndex: 1
-    },
-    content: {
-      ...flex.cb,
+    }],
+    content: [flex.cb, {
+      display: !clean ? "flex" : "none",
       position: "relative",
       width: "100%",
       height: "100vh",
       maxWidth: `${bp.lg}px`
-    },
+    }],
     element: {
       display: "flex",
       width: "50%",
       maxWidth: "256px"
     },
     donut: {
-      alignSelf: "flex-start"
+      alignSelf: light ? "center" : "flex-start"
     },
     disk: {
-      marginLeft: "-30%"
+      alignSelf: "flex-start",
+      marginLeft: light ? 0 : "15%"
     },
     ball: {
       alignSelf: "flex-end"
@@ -11824,18 +11881,22 @@ const Elements = ({
         css: css2.content,
         children: [/* @__PURE__ */ jsx("img", {
           css: [css2.element, css2.donut, "", ""],
-          src: "https://storage.googleapis.com/mauro-web-bucket/images/mauro_donut.png"
+          ...data$1.donut
         }), /* @__PURE__ */ jsx("img", {
           css: [css2.element, css2.disk, "", ""],
-          src: "https://storage.googleapis.com/mauro-web-bucket/images/mauro_disk.png"
+          ...data$1.disk
         }), /* @__PURE__ */ jsx("img", {
           css: [css2.element, css2.ball, "", ""],
-          src: "https://storage.googleapis.com/mauro-web-bucket/images/mauro_ball.png"
+          ...data$1.ball
         })]
       })
     })]
   });
 };
+const data = `< stack >
+  Typescript, Javascript, Node, React & Native, Expo,
+  Nestjs, Next.js, vite, git, github, css, html Figma, Ps, Ai
+< /stack >`;
 const Stack = () => {
   const {
     theme: {
@@ -11849,44 +11910,36 @@ const Stack = () => {
     state: {
       tagsFlags: {
         rounded
-      },
-      mediaFlags: {
-        md: md2
       }
     },
     helpers: {
       styleSheets
     }
-  } = useAtomsGuilde(1);
-  const css2 = styleSheets({
-    card: {
-      ...flex.lt,
+  } = useAtomsGuilde(0);
+  const styles = styleSheets({
+    card: [flex.lt, {
       width: "100%",
-      padding: md2 ? "2em" : "2em 1em",
-      flexDirection: md2 ? "row" : "column",
+      padding: ["2em 1em", "2em"],
+      flexDirection: ["column", "row"],
       backgroundColor: colors.bgPrimary,
       border: `1px solid ${colors.acent}`,
       borderRadius: rounded ? "1em" : "0.5em",
       zIndex: 2
-    },
-    h3: {
-      ...texts.b1,
+    }],
+    h3: [flex.lt, texts.b2, {
       zIndex: 2,
       whiteSpace: "pre-wrap"
-    }
+    }]
   });
   return /* @__PURE__ */ jsx("section", {
     css: briks.container,
     children: /* @__PURE__ */ jsx("div", {
       css: briks.content,
       children: /* @__PURE__ */ jsx("code", {
-        css: css2.card,
+        css: styles.card,
         children: /* @__PURE__ */ jsx("h2", {
-          style: css2.h3,
-          children: `< stack >
-    Typescript, Javascript, Node, React & Native, Expo,
-    Nestjs, Next.js, vite, git, github, css, html Figma, Ps, Ai
-< /stack >`
+          css: styles.h3,
+          children: data
         })
       })
     })
