@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC } from 'react';
 import useAtomsGuilde from '@/components/build/atoms';
 
 const WarningWork: FC = () => {
@@ -18,7 +18,7 @@ const WarningWork: FC = () => {
 
   return (
     <div css={styles.box}>
-      <h5 css={texts.b2}>{ `Estoy trabajando en el sitió, en un par de días estará listo ⚠️`}</h5>
+      <h5 css={texts.b2}>{ 'Estoy trabajando en el sitió, en un par de días estará listo ⚠️'}</h5>
     </div>
   );
 };

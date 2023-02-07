@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import useAtomsGuilde from '@/components/build/atoms';
 
 const data = 'Copyrigth © 2023. Mauro Taliente. Todos los derechos reservados';
@@ -15,7 +15,7 @@ const Fotter = () => {
       backgroundColor: colors.bgPrimary,
       zIndex: 2,
     }],
-    content: [briks.content, flex.cc]
+    content: [briks.content, flex.cc],
   });
 
   return (

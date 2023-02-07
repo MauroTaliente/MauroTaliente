@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react'
+import React, { FC, ReactNode } from 'react';
 import useAtomsGuilde from '@/components/build/atoms';
 
 interface ButtonProps {
@@ -48,7 +48,7 @@ const Button: FC<ButtonProps> = ({
       borderRadius: rounded ? '2em' : '0.25em',
       '&: hover': {
         backgroundColor: `${colors.acent}9D`,
-      }
+      },
     },
   });
 

@@ -1,5 +1,5 @@
-"use strict";
-import { Request, Response } from "express";
+'use strict';
+import { Request, Response } from 'express';
 
 /*
  * List of API examples.

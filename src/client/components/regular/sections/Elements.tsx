@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import useAtomsGuilde from '@/components/build/atoms';
 
-
 const Elements: FC<any> = ({ children }) => {
   const {
     breakPoints: bp,

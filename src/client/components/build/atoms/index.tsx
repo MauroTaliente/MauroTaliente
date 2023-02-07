@@ -1,4 +1,5 @@
-import React, { useMemo } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useMemo } from 'react';
 
 import useStyleGuide from  '@/styles';
 
@@ -10,7 +11,6 @@ const useAtomsGuilde = (refreshLevel: 0 | 1 = 0) => {
     breakPoints: bp,
     theme: { colors, fontFamily },
     helpers: { styleSheets },
-    state: { tagsFlags: { small } },
   } = styleGuide;
   const atomsGuide = useMemo(() => {
 
@@ -87,7 +87,7 @@ const useAtomsGuilde = (refreshLevel: 0 | 1 = 0) => {
         fontFamily: fontFamily.body,
         color: colors.secondary,
         lineHeight: '1.35em',
-      }
+      },
     }, 'simple');
 
     const texts = styleSheets({
@@ -142,7 +142,7 @@ const useAtomsGuilde = (refreshLevel: 0 | 1 = 0) => {
         fontFamily: fontFamily.body,
         fontSize: '1em',
         textDecoration: 'underline',
-      }
+      },
     }, 'facepaint');
 
     const briks = styleSheets({
@@ -155,7 +155,7 @@ const useAtomsGuilde = (refreshLevel: 0 | 1 = 0) => {
         width: '100%',
         maxWidth: `${bp.lg}px`,
         padding: '2rem',
-      }
+      },
     }, 'simple');
 
     return {

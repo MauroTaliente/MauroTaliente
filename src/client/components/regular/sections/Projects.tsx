@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react'
+import React, { FC } from 'react';
 import useAtomsGuilde, { assets } from '@/components/build/atoms';
 import ProjectCard from '@/components/regular/organisms/ProjectCard';
 
@@ -6,44 +6,45 @@ const data = {
   title: 'Trabajos más relevantes',
   subtitle: 'Proyectos',
   proyects: [
-  {
-    title: 'Quiena Inversiones',
-    resume: 'Ahora invertir en Wall Street está al alcance de todos.',
-    tags: ['comercial', 'lead front end'],
-    image: {
-      src: assets('images/min_quiena.png'),
-      srcSet: assets('images/min_quiena@2x.png 1.5x'),
-      alt: 'Daria.com',
+    {
+      title: 'Quiena Inversiones',
+      resume: 'Ahora invertir en Wall Street está al alcance de todos.',
+      tags: ['comercial', 'lead front end'],
+      image: {
+        src: assets('images/min_quiena.png'),
+        srcSet: assets('images/min_quiena@2x.png 1.5x'),
+        alt: 'Daria.com',
+      },
+      onClick: () => {},
     },
-    onClick: () => {},
-  },
-  {
-    title: 'React Style Guides',
-    resume: 'Crear guías de estilos enfocados en Atomic Design en segundos.',
-    tags: ['front end', 'personal'],
-    image: {
-      src: assets('images/mauro_idea.png'),
-      srcSet: assets('images/mauro_idea@2x.png 1.5x'),
-      alt: 'Daria.com',
+    {
+      title: 'React Style Guides',
+      resume: 'Crear guías de estilos enfocados en Atomic Design en segundos.',
+      tags: ['front end', 'personal'],
+      image: {
+        src: assets('images/mauro_idea.png'),
+        srcSet: assets('images/mauro_idea@2x.png 1.5x'),
+        alt: 'Daria.com',
+      },
+      onClick: () => {},
     },
-    onClick: () => {},
-  },
-  {
-    title: 'Daria & Livo',
-    resume: 'La mejor opción para la búsqueda y alquiler de tu nuevo hogar o emprendimiento.',
-    tags: ['comercial', 'front end', 'back end'],
-    image: {
-      src: assets('images/min_daria.png'),
-      srcSet: assets('images/min_daria@2x.png 1.5x'),
-      alt: 'Daria.com',
+    {
+      title: 'Daria & Livo',
+      resume: 'La mejor opción para la búsqueda y alquiler de tu nuevo hogar o emprendimiento.',
+      tags: ['comercial', 'front end', 'back end'],
+      image: {
+        src: assets('images/min_daria.png'),
+        srcSet: assets('images/min_daria@2x.png 1.5x'),
+        alt: 'Daria.com',
+      },
+      onClick: () => {},
     },
-    onClick: () => {},
-  },
-]};
+  ],
+};
 
 const Proyects: FC = () => {
   const {
-    theme: { colors, },
+    theme: { colors },
     helpers: { styleSheets },
     atoms: { flex, briks, texts },
   } = useAtomsGuilde();

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import useAtomsGuilde from '@/components/build/atoms';
 
 const data = `< stack >
@@ -25,7 +25,7 @@ const Stack = () => {
         border: `1px solid ${colors.acent}`,
         borderRadius: rounded ? '1em' : '0.5em',
         zIndex: 2,
-      }
+      },
     ],
     h3: [
       flex.lt,
@@ -33,7 +33,7 @@ const Stack = () => {
       {
         zIndex: 2,
         whiteSpace: 'pre-wrap',
-      }
+      },
     ],
   });
 

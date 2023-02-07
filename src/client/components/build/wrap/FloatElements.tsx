@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, ReactNode, useMemo, useState } from 'react'
+import React, { FC, ReactElement, ReactNode, useMemo, useState } from 'react';
 
 type Aling =  'start' | 'center' | 'end';
 
@@ -12,9 +12,9 @@ type FloatElementsProps = {
   }[];
   children?: ReactNode,
   zIndex: number,
-}
+};
 
-const FloatElements : FC<FloatElementsProps>= ({
+const FloatElements : FC<FloatElementsProps> = ({
   list = [],
   zIndex = 1,
   children,
@@ -52,7 +52,7 @@ const FloatElements : FC<FloatElementsProps>= ({
         }}>
           { data.render }
         </div>
-      )
+      );
     });
   }, [list, root, zIndex]);
 

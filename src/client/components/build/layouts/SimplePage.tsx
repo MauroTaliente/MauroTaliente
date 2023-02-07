@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC, useEffect } from 'react';
 import useAtomsGuilde from '@/components/build/atoms';
 
 
@@ -7,7 +7,7 @@ const SimplePage: FC<any> = ({ children }) => {
     theme: { colors },
     helpers: { styleSheets },
     atoms: { flex },
-    state: { tagsFlags: { box }}
+    state: { tagsFlags: { box } },
   } = useAtomsGuilde();
 
   const rootBgColor = box ? colors.bgPrimary : colors.bgSecondary;
@@ -19,7 +19,7 @@ const SimplePage: FC<any> = ({ children }) => {
         ?.querySelector('body')
         ?.style.setProperty('--bodyColor', rootBgColor);
     return () => {};
-  }, [rootBgColor])
+  }, [rootBgColor]);
   
   const main = styleSheets({
     container: [flex.ct, {
@@ -33,7 +33,7 @@ const SimplePage: FC<any> = ({ children }) => {
     <div css={main.container}>
       { children }
     </div>
-  )
-}
+  );
+};
 
 export default SimplePage;

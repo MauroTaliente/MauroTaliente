@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC } from 'react';
 import useAtomsGuilde from '@/components/build/atoms';
 
 interface TagProps {
@@ -41,11 +41,11 @@ const Tag: FC<TagProps> = ({
   });
 
   return (
-    <span css={styles.box}
+    <button css={styles.box}
       onClick={onClick}
     >
       { title }
-    </span>
+    </button>
   );
 };
 

@@ -36,10 +36,10 @@ const ProjectCard: FC<ProjectCardProps> = ({
   onClick,
 }) => {
   const {
-    theme: { name, colors, fontFamily },
-    helpers: { styleSheets },
+    theme: { colors },
     atoms: { flex, texts },
     state: { tagsFlags: { rounded } },
+    helpers: { styleSheets },
   } = useAtomsGuilde();
 
   const css = styleSheets({
@@ -74,8 +74,8 @@ const ProjectCard: FC<ProjectCardProps> = ({
     }],
     title: [texts.h3,
       {
-      paddingBottom: '0.5rem',
-    }],
+        paddingBottom: '0.5rem',
+      }],
     tags: [flex.cc, {
       paddingBottom: '0.5rem',
       flexDirection: 'row',

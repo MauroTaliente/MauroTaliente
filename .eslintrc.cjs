@@ -1,0 +1,41 @@
+module.exports = {
+  root: true,
+  extends: [
+    'eslint:recommended',
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:react/recommended',
+    'plugin:react-hooks/recommended',
+    'airbnb-typescript',
+    'plugin:import/typescript',
+    'plugin:@typescript-eslint/recommended',
+  ],
+  ignorePatterns: ['.eslintrc.cjs'],
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaFeatures: { jsx: true, tsx: true },
+    sourceType: 'module',
+    project: ['./tsconfig.eslint.json'],
+  },
+  settings: {
+    react: { version: 'detect' },
+  },
+  plugins: [
+    '@typescript-eslint',
+    'react',
+    'react-hooks',
+  ],
+  rules: {
+    '@typescript-eslint/no-empty-function': 'off',
+    '@typescript-eslint/no-unused-expressions': 'off',
+    '@typescript-eslint/no-use-before-define': 'error',
+    '@typescript-eslint/no-duplicate-imports': 'error',
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
+    'react/no-unknown-property': ['error', { ignore: ['css'] }],
+    'import/no-extraneous-dependencies': ['error', {'devDependencies': true}],
+    'import/extensions': 'off',
+  },
+};

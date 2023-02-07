@@ -4,8 +4,8 @@ import mauro from './themes/mauro';
 import fabi from './themes/fabi';
 
 const {
- useStyleGuide,
- StyleGuideProvider,
+  useStyleGuide,
+  StyleGuideProvider,
 } = createStyleGuide({
   forceIrr: false,
   styles: { mode: 'facepaint' },
@@ -13,7 +13,7 @@ const {
   initThemeName: 'mauro',
   root: {
     colors: { primary: '#eaeaea' },
-    fontFamily: { display: `'Lato', sans-serif'` },
+    fontFamily: { display: '\'Lato\', sans-serif\'' },
   },
   scheme: {
     name: ['mauro', 'fabi'],

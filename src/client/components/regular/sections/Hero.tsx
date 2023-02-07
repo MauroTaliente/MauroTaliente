@@ -15,7 +15,7 @@ const data = {
   image: {
     src: assets('images/mauro_saludo.png'),
     srcSet: assets('images/mauro_saludo@2x.png 1.5x'),
-    alt: 'emogi de Mauro saludando'
+    alt: 'emogi de Mauro saludando',
   },
 };
 
@@ -48,7 +48,7 @@ const Hero = () => {
     }],
     b1: [texts.b1, {
       label: 'info',
-      paddingBottom: '1rem'
+      paddingBottom: '1rem',
     }],
     mauro: [flex.cc, {
       display: 'flex',

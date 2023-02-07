@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import useAtomsGuilde from '@/components/build/atoms';
 import Button from '@/components/build/molecules/Button';
 
@@ -15,7 +15,7 @@ const data = {
   curriculum: {
     href: '/assets/MauroTalienteCv.pdf',
     button: 'Descargar CV',
-  }
+  },
 };
 
 const History = () => {
@@ -53,7 +53,7 @@ const History = () => {
           <a href={data.linkdin.href} target="_blank" rel="noreferrer">
             <Button title={data.linkdin.button} />
           </a>
-          <a href={data.curriculum.href} target="_blank" >
+          <a href={data.curriculum.href} target="_blank" rel="noreferrer" >
             <Button title={data.curriculum.button} />
           </a>
         </footer>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import useAtomsGuilde, { assets } from '@/components/build/atoms';
 
 const data = {

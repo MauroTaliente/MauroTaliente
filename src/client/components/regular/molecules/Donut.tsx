@@ -6,9 +6,9 @@ const Donut = () => {
   const {
     theme,
     breakPoints: bp,
+    atoms: { flex },
+    state: { mediaFlags: { sm } },
     helpers: { styleSheets, setTheme },
-    atoms: { flex, briks, texts },
-    state: { mediaFlags: { sm }},
   } = useAtomsGuilde();
 
   const donut = styleSheets({
