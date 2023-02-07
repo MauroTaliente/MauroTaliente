@@ -22,14 +22,15 @@ const SimplePage: FC<any> = ({ children }) => {
   }, [rootBgColor])
   
   const main = styleSheets({
-    container: {
+    container: [flex.ct, {
+      minWidth: '100%',
       minHeight: '100vh',
       backgroundColor: rootBgColor,
-    },
+    }],
   });
 
   return (
-    <div css={[flex.ct, main.container]}>
+    <div css={main.container}>
       { children }
     </div>
   )

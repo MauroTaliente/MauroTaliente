@@ -25,6 +25,7 @@ export default defineConfig({
   server: { port: 3000 },
   clearScreen: false,
   build: { minify: false },
+  esbuild: { logOverride: { 'this-is-undefined-in-esm': 'silent' } },
   publicDir: 'public',
   // @ts-ignore
   test,

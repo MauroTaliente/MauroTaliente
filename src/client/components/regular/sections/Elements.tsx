@@ -5,24 +5,22 @@ import useAtomsGuilde from '../../build/atoms';
 const Elements: FC<any> = ({ children }) => {
   const {
     breakPoints: bp,
-    theme: { colors, },
+    atoms: { flex },
     helpers: { styleSheets },
-    atoms: { flex, briks, texts },
   } = useAtomsGuilde(0);
   const css = styleSheets({
-    container: {
-      ...briks.container,
+    container: [flex.cc, {
       position: 'fixed',
+      width: '100%',
       height: '100vh',
       zIndex: 1,
-    },
-    content: {
-      ...flex.cb,
+    }],
+    content: [flex.cb, {
       position: 'relative',
       width: '100%',
       height: '100vh',
       maxWidth: `${bp.lg}px`,
-    },
+    }],
     element: {
       display: 'flex',
       width: '50%',

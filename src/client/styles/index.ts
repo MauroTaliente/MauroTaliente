@@ -7,12 +7,13 @@ const {
  useStyleGuide,
  StyleGuideProvider,
 } = createStyleGuide({
-  forceIrr: true,
+  forceIrr: false,
+  styles: { mode: 'facepaint' },
   breakPoints: { sm: 640, md: 768, lg: 1024, xl: 1280, sl: 1440, ul: 1920 },
   initThemeName: 'mauro',
   root: {
-    colors: { color: '#eaeaea' },
-    fontFamily: { display: `'Lato', sans-serif;'` },
+    colors: { primary: '#eaeaea' },
+    fontFamily: { display: `'Lato', sans-serif'` },
   },
   scheme: {
     name: ['mauro', 'fabi'],
@@ -20,10 +21,7 @@ const {
     colors: ['acent', 'primary', 'secondary', 'ngAcent', 'bgPrimary', 'bgSecondary'],
     fontFamily: ['display', 'body', 'element'],
   },
-  themes: [
-    mauro,
-    fabi,
-  ],
+  themes: [ mauro, fabi ],
 } as const);
 
 export {

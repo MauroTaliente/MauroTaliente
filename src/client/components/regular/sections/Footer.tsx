@@ -1,31 +1,27 @@
 import React from 'react'
 import useAtomsGuilde from '../../build/atoms';
 
+const data = 'Copyrigth © 2023. Mauro Taliente. Todos los derechos reservados';
+
 const Fotter = () => {
   const {
     theme: { colors },
     atoms: { flex, briks, texts },
-    state: { tagsFlags: { rounded }},
     helpers: { styleSheets },
-  } = useAtomsGuilde(0);
+  } = useAtomsGuilde();
 
-  const css = styleSheets({
-    container: {
-      ...briks.container,
+  const styles = styleSheets({
+    container: [briks.container, {
       backgroundColor: colors.bgPrimary,
       zIndex: 2,
-    },
-    label: {
-      ...texts.d2,
-    },
+    }],
+    content: [briks.content, flex.cc]
   });
 
   return (
-    <section css={css.container}>
-      <div css={briks.content}>
-      <h5 css={css.label}>{
-        `Copyrigth © 2023. Mauro Taliente. Todos los derechos reservados`
-      }</h5>
+    <section css={styles.container}>
+      <div css={styles.content}>
+      <h5 css={texts.d2}>{ data }</h5>
       </div>
     </section>
   );

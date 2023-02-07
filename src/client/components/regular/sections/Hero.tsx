@@ -1,5 +1,23 @@
-import React from 'react'
-import useAtomsGuilde from '../../build/atoms';
+import React from 'react';
+import useAtomsGuilde, { assets } from '../../build/atoms';
+
+const data = {
+  title: `Hola 👋,
+  soy Mauro.`,
+  about: `Sr FrontEnd Developer 
+  con más de 8 años de experiencia
+  y conocimiento de JavaScript, 
+  React & Native, Node.js etc.`,
+  button: {
+    label: '🤘 Disponible para trabajar',
+    href: 'mailto:mauro.taliente3@gmail.com',
+  },
+  image: {
+    src: assets('images/mauro_saludo.png'),
+    srcSet: assets('images/mauro_saludo@2x.png 1.5x'),
+    alt: 'emogi de Mauro saludando'
+  },
+};
 
 const Hero = () => {
   const {
@@ -8,56 +26,43 @@ const Hero = () => {
     atoms: { flex, briks, texts },
     state: { 
       themesFlags,
-      mediaFlags: { md },
     },
   } = useAtomsGuilde(1);
 
   const css = styleSheets({
-    container: {
-      ...briks.container,
-      label: 'container',
+    container: [briks.container, {
       zIndex: 2,
       backgroundColor: `${colors.bgSecondary}30`,
-    },
-    content: {
-      ...briks.content,
+    }],
+    content: [briks.content, {
       alignItems: 'flex-end',
       label: 'content',
-      flexDirection: md ? 'row' : 'column',
-    },
-    hola: {
-      ...flex.rc,
-      label: 'hola',
-      flex:  4,
-    },
-    h1: {
-      ...texts.h1,
-      label: 'hola',
+      flexDirection: ['column', 'row'],
+    }],
+    hola: [flex.rc, {
+      flex: 4,
+    }],
+    h1: [texts.h1, {
       paddingBottom: '1rem',
       cursor: 'pointer',
-    },
-    b1: {
-      ...texts.b1,
+    }],
+    b1: [texts.b1, {
       label: 'info',
       paddingBottom: '1rem'
-    },
-    mauro: {
-      ...flex.cc,
-      label: 'mauro',
+    }],
+    mauro: [flex.cc, {
       display: 'flex',
       flex: 3,
       marginBottom: '-2rem',
       position: 'relative',
       overflow: 'hidden',
-    },
+    }],
     image: {
       objectFit: 'cover',
       width: '100%',
       height: '100%',
-    }
+    },
   });
-
-  const image = 'https://storage.googleapis.com/mauro-web-bucket/images/mauro_saludo';
 
   const applyNextTheme = () => {
     const themeNames = Object.keys(themesFlags);
@@ -72,30 +77,12 @@ const Hero = () => {
     <section css={css.container}>
       <div css={css.content}>
         <main css={css.hola}>
-          <h1 css={css.h1}
-            onClick={applyNextTheme}
-          >{
-            `Hola 👋,
-            soy Mauro.`
-          }</h1>
-          <h4 css={css.b1}>{
-            `Sr FrontEnd Developer 
-            con más de 8 años de experiencia
-            y conocimiento de JavaScript, 
-            React & Native, Node.js etc.`
-          }</h4>
-          <a css={texts.a}
-            href='mailto:mauro.taliente3@gmail.com'
-          >{
-          `🤘 Disponible para trabajar`
-          }</a>
+          <h1 css={css.h1} onClick={applyNextTheme}>{ data.title }</h1>
+          <h4 css={css.b1}>{ data.about }</h4>
+          <a css={texts.a} href={data.button.href}>{ data.button.label }</a>
         </main>
         <aside css={css.mauro}>
-          <img css={css.image}
-            src={`${image}.png`}
-            srcSet={`${image}@2x.png 1.5x`}
-            alt="emogi de Mauro saludando"
-          />
+          <img css={css.image} {...data.image} />
         </aside>
       </div>
     </section>

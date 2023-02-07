@@ -1,5 +1,8 @@
-import React, { useMemo } from 'react'
+import React, { useMemo } from 'react';
+
 import useStyleGuide from  '../../../styles';
+
+const assets = (p = '') => 'https://storage.googleapis.com/mauro-web-bucket/' + p;
 
 const useAtomsGuilde = (refreshLevel: 0 | 1 = 0) => {
   const styleGuide = useStyleGuide(refreshLevel);
@@ -10,6 +13,7 @@ const useAtomsGuilde = (refreshLevel: 0 | 1 = 0) => {
     state: { tagsFlags: { small } },
   } = styleGuide;
   const atomsGuide = useMemo(() => {
+
     // right-top | center-top | left-top
     // right-center | center-center | left-center
     // right-bottom | center-bottom | left-bottom
@@ -68,7 +72,7 @@ const useAtomsGuilde = (refreshLevel: 0 | 1 = 0) => {
         justifyContent: 'center',
         alignItems: 'flex-end',
       },
-    });
+    }, 'simple');
 
     const commons = styleSheets({
       hedings: {
@@ -84,7 +88,7 @@ const useAtomsGuilde = (refreshLevel: 0 | 1 = 0) => {
         color: colors.secondary,
         lineHeight: '1.35em',
       }
-    });
+    }, 'simple');
 
     const texts = styleSheets({
       h1: {
@@ -114,11 +118,11 @@ const useAtomsGuilde = (refreshLevel: 0 | 1 = 0) => {
       },
       b1: {
         ...commons.texts,
-        fontSize: small ? '1.2em' : '1.5em',
+        fontSize: ['1.2em', '1.5em'],
       },
       b2: {
         ...commons.texts,
-        fontSize: small ? '1em' : '1.2em',
+        fontSize: ['1.2em', '1.5em'],
       },
       d1: {
         ...commons.texts,
@@ -139,7 +143,7 @@ const useAtomsGuilde = (refreshLevel: 0 | 1 = 0) => {
         fontSize: '1em',
         textDecoration: 'underline',
       }
-    });
+    }, 'facepaint');
 
     const briks = styleSheets({
       container: {
@@ -152,7 +156,7 @@ const useAtomsGuilde = (refreshLevel: 0 | 1 = 0) => {
         maxWidth: `${bp.lg}px`,
         padding: '2rem',
       }
-    });
+    }, 'simple');
 
     return {
       ...styleGuide,
@@ -163,4 +167,7 @@ const useAtomsGuilde = (refreshLevel: 0 | 1 = 0) => {
   return atomsGuide;
 };
 
-export default useAtomsGuilde;
+export {
+  assets,
+  useAtomsGuilde as default,
+};

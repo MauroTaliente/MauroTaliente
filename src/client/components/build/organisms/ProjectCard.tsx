@@ -1,9 +1,16 @@
 import React, { FC } from 'react'
-import useAtomsGuilde from '../atoms';
+import useAtomsGuilde, { assets } from '../atoms';
 
 import Button from '../molecules/Button';
 import Tag from '../molecules/Tag';
 
+const data = {
+  button: 'Ver más',
+  image: {
+    src: assets('/images/mauro_donut.png'),
+    alt: 'Donut',
+  },
+};
 interface ProjectCardProps {
   index: number;
   total: number;
@@ -30,27 +37,22 @@ const ProjectCard: FC<ProjectCardProps> = ({
   const {
     theme: { name, colors, fontFamily },
     helpers: { styleSheets },
-    atoms: { flex, briks, texts },
-    state: {
-      mediaFlags: { md },
-      tagsFlags: { rounded },
-    },
-  } = useAtomsGuilde(1);
+    atoms: { flex, texts },
+    state: { tagsFlags: { rounded } },
+  } = useAtomsGuilde();
 
   const css = styleSheets({
-    box: {
-      ...flex.rt,
+    box: [flex.rt, {
       width: '100%',
       position: 'relative',
-      label: 'content',
-      flexDirection: md ? 'row' : 'column',
+      flexDirection: ['column', 'row'],
       flexWrap: 'wrap',
       gap: '2em',
       backgroundColor: rounded ? colors.bgPrimary : 'transparent',
       border: rounded ? `1px solid ${colors.secondary}30` : 'none',
       padding: rounded ? '1em 2em' : 0,
       borderRadius: rounded ? '0.5em' : 0,
-    },
+    }],
     line: {
       display: (index + 1 === total || rounded) ? 'none' : 'flex',
       position: 'absolute',
@@ -60,48 +62,38 @@ const ProjectCard: FC<ProjectCardProps> = ({
       left: 'calc(50% - 3em)',
       bottom: '-1.5em',
     },
-    info: {
-      ...flex.rc,
-      label: 'info',
+    info: [flex.rc, {
       flex: 3,
-    },
-    counter: {
-      ...texts.h4,
+    }],
+    counter: [texts.h4, {
+      display: 'flex',
       'small': {
         fontSize: '0.7em',
       },
-    },
-    title: {
-      ...texts.h3,
+    }],
+    title: [texts.h3,
+      {
       paddingBottom: '0.5rem',
-    },
-    tags: {
-      ...flex.cc,
+    }],
+    tags: [flex.cc, {
       paddingBottom: '0.5rem',
       flexDirection: 'row',
       gap: '0.5em',
-    },
-    resume: {
-      ...texts.b2,
+    }],
+    resume: [texts.b2, {
       paddingBottom: '0.75rem',
-    },
-    aside: {
-      ...flex.cc,
+    }],
+    aside: [flex.cc, {
       flex: 2,
       borderRadius: '1em',
       backgroundColor: colors.ngAcent,
-    },
+    }],
     image: {
       display: 'flex',
       width: '100%',
       maxWidth: '256px',
     },
   });
-
-  const defaultImage = {
-    src: `https://storage.googleapis.com/mauro-web-bucket/images/mauro_donut.png`,
-    alt: 'Donut',
-  };
 
   return (
     <div css={css.box}>
@@ -114,11 +106,11 @@ const ProjectCard: FC<ProjectCardProps> = ({
           ))}
         </ul>
         <p css={css.resume}>{ resume }</p>
-        <Button title="Ver más" />
+        <Button title={data.button} onClick={onClick} />
       </main>
       <aside css={css.aside}>
         <img css={css.image}
-          { ...(image || defaultImage) }
+          { ...(image || data.image) }
         />
       </aside>
       <span css={css.line}/>
