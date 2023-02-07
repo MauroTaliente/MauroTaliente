@@ -58,7 +58,6 @@ function _mergeNamespaces(n2, m2) {
     fetch(link.href, fetchOpts);
   }
 })();
-const reset = "";
 function getDefaultExportFromCjs(x2) {
   return x2 && x2.__esModule && Object.prototype.hasOwnProperty.call(x2, "default") ? x2["default"] : x2;
 }
@@ -7582,7 +7581,7 @@ var m$2 = reactDom.exports;
   hydrateRoot = m$2.hydrateRoot;
 }
 /**
- * @remix-run/router v1.3.1
+ * @remix-run/router v1.3.2
  *
  * Copyright (c) Remix Software Inc.
  *
@@ -9057,7 +9056,7 @@ function jsxs(type3, props, key) {
   return jsxs$1(Emotion, createEmotionProps(type3, props), key);
 }
 /**
- * React Router v6.8.0
+ * React Router v6.8.1
  *
  * Copyright (c) Remix Software Inc.
  *
@@ -9212,7 +9211,7 @@ var AwaitRenderStatus;
 new Promise(() => {
 });
 /**
- * React Router DOM v6.8.0
+ * React Router DOM v6.8.1
  *
  * Copyright (c) Remix Software Inc.
  *
@@ -10480,10 +10479,12 @@ var ForceIRR = function(_a) {
   var _c = react.exports.useState(false), isMounted = _c[0], setMountedState = _c[1];
   useIsomorphicLayoutEffect$1(function() {
     if (!defer)
-      setMountedState(true);
+      setMountedState(function(pre) {
+        return !pre;
+      });
   }, [defer]);
   return /* @__PURE__ */ jsxs(Fragment, {
-    children: [isMounted ? children : children, " "]
+    children: [isMounted && children, !isMounted && children]
   });
 };
 var Actions;
@@ -10733,19 +10734,13 @@ var reducer = function(data2, _a) {
     });
   return data2;
 };
-var getProvider = function(config, BaseProvider) {
-  var emptyIrr = {
-    active: false,
-    loading: null,
-    defer: false
-  };
-  var baseIrr = config.forceIrr || {};
-  var forceIrr = mergeDeepRight2(emptyIrr, baseIrr);
-  var StyleGuideProvider2 = forceIrr.active ? function(_a) {
+var getProvider = function(forceIrr, BaseProvider) {
+  if (forceIrr === void 0) {
+    forceIrr = false;
+  }
+  var StyleGuideProvider2 = forceIrr ? function(_a) {
     var children = _a.children;
     return /* @__PURE__ */ jsx(ForceIRR, {
-      loading: forceIrr.loading,
-      defer: forceIrr.defer,
       children: /* @__PURE__ */ jsx(BaseProvider, {
         children
       })
@@ -10753,14 +10748,14 @@ var getProvider = function(config, BaseProvider) {
   } : BaseProvider;
   return StyleGuideProvider2;
 };
-var createStyleGuide = function(config) {
+function createStyleGuide(config) {
   var initGuide = getInitConfig(config);
   var _a = newContext({
     name: "StyleGuide",
     initState: initGuide,
     reducer
   }), BaseProvider = _a.StyleGuideProvider, useStyleGuideState = _a.useStyleGuideState, useStyleGuideUpdater = _a.useStyleGuideUpdater;
-  var StyleGuideProvider2 = getProvider(config, BaseProvider);
+  var StyleGuideProvider2 = getProvider(config.forceIrr, BaseProvider);
   var useStyleGuide2 = function(refreshLevel) {
     if (refreshLevel === void 0) {
       refreshLevel = 0;
@@ -10809,7 +10804,7 @@ var createStyleGuide = function(config) {
     StyleGuideProvider: StyleGuideProvider2,
     useStyleGuide: useStyleGuide2
   };
-};
+}
 const mauro = {
   name: "mauro",
   tags: ["light"],
@@ -10848,9 +10843,7 @@ const {
   useStyleGuide,
   StyleGuideProvider
 } = createStyleGuide({
-  forceIrr: {
-    active: false
-  },
+  forceIrr: true,
   breakPoints: {
     sm: 640,
     md: 768,
@@ -10869,13 +10862,12 @@ const {
     }
   },
   scheme: {
+    name: ["mauro", "fabi"],
+    tags: ["dark", "light", "small", "rounded"],
     colors: ["acent", "primary", "secondary", "ngAcent", "bgPrimary", "bgSecondary"],
     fontFamily: ["display", "body", "element"]
   },
-  themes: [
-    mauro,
-    fabi
-  ]
+  themes: [mauro, fabi]
 });
 const useAtomsGuilde = (refreshLevel = 0) => {
   const styleGuide = useStyleGuide(refreshLevel);
@@ -11628,7 +11620,7 @@ const History = () => {
             title: "LinkedIn"
           })
         }), /* @__PURE__ */ jsx("a", {
-          href: "static/assets/MauroTalienteCv.pdf",
+          href: "/assets/MauroTalienteCv.pdf",
           target: "_blank",
           children: /* @__PURE__ */ jsx(Button, {
             title: "Descargar CV"
