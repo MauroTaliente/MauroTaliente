@@ -1,5 +1,5 @@
 import React from 'react'
-import useAtomsGuilde from '../../build/atoms';
+import useAtomsGuilde from '@/components/build/atoms';
 
 const data = 'Copyrigth © 2023. Mauro Taliente. Todos los derechos reservados';
 

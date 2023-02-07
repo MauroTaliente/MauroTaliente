@@ -1,6 +1,9 @@
+// main vite
 import { defineConfig } from 'vite';
+// plugins
 import react from '@vitejs/plugin-react';
-
+import tsconfigPaths from 'vite-tsconfig-paths';
+// test
 import type { UserConfig } from 'vitest/config';
 
 const test = {
@@ -15,6 +18,7 @@ const test = {
 export default defineConfig({
   base: './',
   plugins: [
+    tsconfigPaths(),
     react({
       include: '**/*.tsx',
       jsxImportSource: '@emotion/react',

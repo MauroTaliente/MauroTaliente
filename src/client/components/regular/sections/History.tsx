@@ -1,6 +1,6 @@
 import React from 'react'
-import useAtomsGuilde from '../../build/atoms';
-import Button from '../../build/molecules/Button';
+import useAtomsGuilde from '@/components/build/atoms';
+import Button from '@/components/build/molecules/Button';
 
 
 const data = {

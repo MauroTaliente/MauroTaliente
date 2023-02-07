@@ -1,7 +1,7 @@
 import React, {
   FC, useRef, ReactNode, useState, useEffect,
 } from 'react';
-import useStyleGuide from  '../../../styles';
+import useStyleGuide from  '@/styles';
 
 interface BackgroundProps {
   children: ReactNode[] | ReactNode | any;

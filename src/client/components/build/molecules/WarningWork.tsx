@@ -1,32 +1,24 @@
-import React, { FC, ReactNode } from 'react'
-import useAtomsGuilde from '../atoms';
-
-
+import React, { FC } from 'react'
+import useAtomsGuilde from '@/components/build/atoms';
 
 const WarningWork: FC = () => {
   const {
     atoms: { flex, texts },
     helpers: { styleSheets },
-    theme: { colors, fontFamily },
-    state: { tagsFlags: { rounded } },
-  } = useAtomsGuilde(0);
+    theme: { colors },
+  } = useAtomsGuilde();
 
   const styles = styleSheets({
-    box: {
-      ...flex.cc,
+    box: [flex.cc, {
       width: '100%',
       padding: '1em',
       borderBottom: `1px solid ${colors.acent}`,
-    },
-    message: {
-      ...texts.b2,
-    },
+    }],
   });
 
   return (
-    <div css={styles.box}
-    >
-      <h5 css={styles.message} >{ `Estoy trabajando en el sitió, en un par de días estará listo ⚠️`}</h5>
+    <div css={styles.box}>
+      <h5 css={texts.b2}>{ `Estoy trabajando en el sitió, en un par de días estará listo ⚠️`}</h5>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import useStyleGuide from  '../../../styles';
+import useStyleGuide from  '@/styles';
 
 const assets = (p = '') => 'https://storage.googleapis.com/mauro-web-bucket/' + p;
 

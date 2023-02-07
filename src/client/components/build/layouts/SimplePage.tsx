@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react'
-import useAtomsGuilde from '../atoms';
+import useAtomsGuilde from '@/components/build/atoms';
 
 
 const SimplePage: FC<any> = ({ children }) => {

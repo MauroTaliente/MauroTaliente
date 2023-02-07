@@ -1,5 +1,5 @@
 import React from 'react';
-import useAtomsGuilde from '../../build/atoms';
+import useAtomsGuilde from '@/components/build/atoms';
 
 // TODO TRANSFORM TO STIKER
 const Donut = () => {

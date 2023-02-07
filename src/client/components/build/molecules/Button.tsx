@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react'
-import useAtomsGuilde from '../../build/atoms';
+import useAtomsGuilde from '@/components/build/atoms';
 
 interface ButtonProps {
   title?: string;

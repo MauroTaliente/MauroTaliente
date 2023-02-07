@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import useAtomsGuilde from '../../build/atoms';
+import useAtomsGuilde from '@/components/build/atoms';
 
 
 const Elements: FC<any> = ({ children }) => {

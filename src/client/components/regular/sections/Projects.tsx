@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react'
-import useAtomsGuilde, { assets } from '../../build/atoms';
-import ProjectCard from '../../build/organisms/ProjectCard';
+import useAtomsGuilde, { assets } from '@/components/build/atoms';
+import ProjectCard from '@/components/regular/organisms/ProjectCard';
 
 const data = {
   title: 'Trabajos más relevantes',

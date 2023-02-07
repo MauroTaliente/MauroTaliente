@@ -1,8 +1,9 @@
-import React, { FC } from 'react'
-import useAtomsGuilde, { assets } from '../atoms';
-
-import Button from '../molecules/Button';
-import Tag from '../molecules/Tag';
+import React, { FC } from 'react';
+// atoms
+import useAtomsGuilde, { assets } from '@/components/build/atoms';
+// molecules
+import Button from '@/components/build/molecules/Button';
+import Tag from '@/components/build/molecules/Tag';
 
 const data = {
   button: 'Ver más',
@@ -109,9 +110,7 @@ const ProjectCard: FC<ProjectCardProps> = ({
         <Button title={data.button} onClick={onClick} />
       </main>
       <aside css={css.aside}>
-        <img css={css.image}
-          { ...(image || data.image) }
-        />
+        <img css={css.image} {...(image || data.image)} />
       </aside>
       <span css={css.line}/>
     </div>

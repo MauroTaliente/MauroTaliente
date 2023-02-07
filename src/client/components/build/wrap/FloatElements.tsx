@@ -1,5 +1,4 @@
-import React, { FC, ReactElement, ReactNode, useMemo, useRef, useState } from 'react'
-
+import React, { FC, ReactElement, ReactNode, useMemo, useState } from 'react'
 
 type Aling =  'start' | 'center' | 'end';
 
@@ -14,7 +13,6 @@ type FloatElementsProps = {
   children?: ReactNode,
   zIndex: number,
 }
-
 
 const FloatElements : FC<FloatElementsProps>= ({
   list = [],
@@ -62,7 +60,6 @@ const FloatElements : FC<FloatElementsProps>= ({
     <div css={{
       display: 'flex',
       flexDirection: 'column',
-      // position: 'absolute',
       width: '100%', 
       flex: 1,
     }}

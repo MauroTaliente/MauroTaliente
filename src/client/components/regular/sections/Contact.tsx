@@ -1,5 +1,5 @@
 import React from 'react'
-import useAtomsGuilde, { assets } from '../../build/atoms';
+import useAtomsGuilde, { assets } from '@/components/build/atoms';
 
 const data = {
   title: 'Contacto',

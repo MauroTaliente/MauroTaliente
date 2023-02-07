@@ -1,5 +1,5 @@
 import React from 'react'
-import useAtomsGuilde from '../../build/atoms';
+import useAtomsGuilde from '@/components/build/atoms';
 
 const data = `< stack >
   Typescript, Javascript, Node, React & Native, Expo,
