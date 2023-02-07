@@ -1,5 +1,6 @@
 import { createStyleGuide } from 'react-emotion-styles-guide';
 
+import { formal, scope } from './themes/experimentals';
 import mauro from './themes/mauro';
 import fabi from './themes/fabi';
 
@@ -10,18 +11,18 @@ const {
   forceIrr: false,
   styles: { mode: 'facepaint' },
   breakPoints: { sm: 640, md: 768, lg: 1024, xl: 1280, sl: 1440, ul: 1920 },
-  initThemeName: 'mauro',
+  initThemeName: 'scope',
   root: {
     colors: { primary: '#eaeaea' },
     fontFamily: { display: '\'Lato\', sans-serif\'' },
   },
   scheme: {
-    name: ['mauro', 'fabi'],
-    tags: ['dark', 'light', 'small', 'rounded'],
+    name: ['mauro', 'fabi', 'formal', 'scope'],
+    tags: ['dark', 'light', 'clean', 'rounded'],
     colors: ['acent', 'primary', 'secondary', 'ngAcent', 'bgPrimary', 'bgSecondary'],
     fontFamily: ['display', 'body', 'element'],
   },
-  themes: [ mauro, fabi ],
+  themes: [ mauro, fabi, formal, scope ],
 } as const);
 
 export {

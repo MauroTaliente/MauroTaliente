@@ -1,7 +1,7 @@
 import React from 'react';
 import useAtomsGuilde, { assets } from '@/components/build/atoms';
 
-const data = {
+const getData = (clean: boolean) => ({
   title: `Hola 👋,
   soy Mauro.`,
   about: `Sr FrontEnd Developer 
@@ -13,11 +13,11 @@ const data = {
     href: 'mailto:mauro.taliente3@gmail.com',
   },
   image: {
-    src: assets('images/mauro_saludo.png'),
-    srcSet: assets('images/mauro_saludo@2x.png 1.5x'),
+    src: assets(clean ? 'images/mauro-white.png' : 'images/mauro_saludo.png'),
+    srcSet: assets(clean ? 'images/mauro-white@2x.png 1.5x' : 'images/mauro_saludo@2x.png 1.5x'),
     alt: 'emogi de Mauro saludando',
   },
-};
+});
 
 const Hero = () => {
   const {
@@ -26,6 +26,7 @@ const Hero = () => {
     atoms: { flex, briks, texts },
     state: { 
       themesFlags,
+      tagsFlags: { clean },
     },
   } = useAtomsGuilde(1);
 
@@ -41,15 +42,10 @@ const Hero = () => {
     }],
     hola: [flex.rc, {
       flex: 4,
-    }],
-    h1: [texts.h1, {
-      paddingBottom: '1rem',
       cursor: 'pointer',
     }],
-    b1: [texts.b1, {
-      label: 'info',
-      paddingBottom: '1rem',
-    }],
+    h1: [texts.h1, { paddingBottom: '1rem' }],
+    b1: [texts.b1, { paddingBottom: '1rem' }],
     mauro: [flex.cc, {
       display: 'flex',
       flex: 3,
@@ -58,9 +54,10 @@ const Hero = () => {
       overflow: 'hidden',
     }],
     image: {
-      objectFit: 'cover',
+      objectFit: 'contain',
       width: '100%',
       height: '100%',
+      maxHeight: '410px',
     },
   });
 
@@ -73,11 +70,13 @@ const Hero = () => {
     setTheme(selectName);
   };
 
+  const data = getData(clean);
+
   return (
     <section css={css.container}>
       <div css={css.content}>
-        <main css={css.hola}>
-          <h1 css={css.h1} onClick={applyNextTheme}>{ data.title }</h1>
+        <main css={css.hola} role="button" onClick={applyNextTheme}>
+          <h1 css={css.h1}>{ data.title }</h1>
           <h4 css={css.b1}>{ data.about }</h4>
           <a css={texts.a} href={data.button.href}>{ data.button.label }</a>
         </main>

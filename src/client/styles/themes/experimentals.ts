@@ -1,24 +1,24 @@
 const scope = {
   name: 'scope',
-  tags: ['box', 'small', 'rounded'],
+  tags: ['light', 'rounded', 'clean'],
   colors: {
-    acent: '#e70052',
-    primary: '#171717',
-    secondary: '#303443',
-    ngAcent: '#ffffff',
-    bgPrimary: '#ffffff',
-    bgSecondary: '#edf0fa',
+    acent: '#FFFFFD',
+    primary: '#FFFFFD',
+    secondary: '#A8A7AC',
+    ngAcent: '#29282D',
+    bgPrimary: '#29282D',
+    bgSecondary: '#1b1b1e',
   },
   fontFamily: {
-    display: 'Lato',
-    body: 'IBM Plex Sans',
-    element: 'Lato',
+    display: 'IBM Plex Mono',
+    body: 'IBM Plex Mono',
+    element: 'IBM Plex Mono',
   },
 };
 
 const formal = {
-  name: 'pancho',
-  tags: ['light', 'small'],
+  name: 'formal',
+  tags: ['light', 'clean'],
   colors: {
     acent: '#ff4e30',
     primary: '#020202',

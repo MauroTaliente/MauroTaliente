@@ -1,6 +1,6 @@
 export default {
   name: 'mauro',
-  tags: ['light'],
+  tags: ['dark'],
   colors: {
     acent: '#9D84B8',
     primary: '#FFFFFD',

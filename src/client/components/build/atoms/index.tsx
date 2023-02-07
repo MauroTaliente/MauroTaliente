@@ -79,14 +79,14 @@ const useAtomsGuilde = (refreshLevel: 0 | 1 = 0) => {
         fontWeight: 500,
         fontFamily: fontFamily.display,
         color: colors.primary,
-        lineHeight: '1.35em',
+        lineHeight: '1.25em',
         whiteSpace: 'pre-line',
       },
       texts: {
         fontWeight: 300,
         fontFamily: fontFamily.body,
         color: colors.secondary,
-        lineHeight: '1.35em',
+        lineHeight: '1.5em',
       },
     }, 'simple');
 
@@ -118,11 +118,11 @@ const useAtomsGuilde = (refreshLevel: 0 | 1 = 0) => {
       },
       b1: {
         ...commons.texts,
-        fontSize: ['1.2em', '1.5em'],
+        fontSize: '1.5em',
       },
       b2: {
         ...commons.texts,
-        fontSize: ['1.2em', '1.5em'],
+        fontSize: '1.2em',
       },
       d1: {
         ...commons.texts,

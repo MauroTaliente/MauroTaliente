@@ -29,7 +29,7 @@ const Stack = () => {
     ],
     h3: [
       flex.lt,
-      texts.b1,
+      texts.b2,
       {
         zIndex: 2,
         whiteSpace: 'pre-wrap',

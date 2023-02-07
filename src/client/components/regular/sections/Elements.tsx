@@ -1,11 +1,27 @@
 import React, { FC } from 'react';
-import useAtomsGuilde from '@/components/build/atoms';
+import useAtomsGuilde, { assets } from '@/components/build/atoms';
+
+const data = {
+  donut: {
+    src: assets('images/mauro_donut.png'),
+    alt: 'donut violeta',
+  },
+  disk: {
+    src: assets('images/mauro_disk.png'),
+    alt: 'disco violeta',
+  },
+  ball: {
+    src: assets('images/mauro_ball.png'),
+    alt: 'bola violeta',
+  },
+};
 
 const Elements: FC<any> = ({ children }) => {
   const {
     breakPoints: bp,
     atoms: { flex },
     helpers: { styleSheets },
+    state: { tagsFlags: { light, clean } },
   } = useAtomsGuilde(0);
   const css = styleSheets({
     container: [flex.cc, {
@@ -15,6 +31,7 @@ const Elements: FC<any> = ({ children }) => {
       zIndex: 1,
     }],
     content: [flex.cb, {
+      display: !clean ? 'flex' : 'none',
       position: 'relative',
       width: '100%',
       height: '100vh',
@@ -26,10 +43,11 @@ const Elements: FC<any> = ({ children }) => {
       maxWidth: '256px',
     },
     donut: {
-      alignSelf: 'flex-start',
+      alignSelf: light ? 'center' : 'flex-start',
     },
     disk: {
-      marginLeft: '-30%',
+      alignSelf: 'flex-start',
+      marginLeft: light ? 0 : '15%',
     },
     ball: {
       alignSelf: 'flex-end',
@@ -40,9 +58,9 @@ const Elements: FC<any> = ({ children }) => {
       { children }
       <div css={css.container}>
         <div css={css.content}>
-            <img css={[css.element, css.donut]} src="https://storage.googleapis.com/mauro-web-bucket/images/mauro_donut.png"/>
-            <img css={[css.element, css.disk]} src="https://storage.googleapis.com/mauro-web-bucket/images/mauro_disk.png"/>
-            <img css={[css.element, css.ball]} src="https://storage.googleapis.com/mauro-web-bucket/images/mauro_ball.png"/>
+            <img css={[css.element, css.donut]} {...data.donut}/>
+            <img css={[css.element, css.disk]} {...data.disk}/>
+            <img css={[css.element, css.ball]} {...data.ball}/>
         </div>
       </div>
     </>

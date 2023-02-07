@@ -9,6 +9,7 @@ interface ButtonProps {
   type?: 'regular' | 'secondary' | 'clean';
   children?: ReactNode;
   onClick?: () => void; 
+  style?: any;
 }
 
 const Button: FC<ButtonProps> = ({
@@ -18,7 +19,8 @@ const Button: FC<ButtonProps> = ({
   left = null,
   right = null,
   children = null,
-  onClick = undefined,
+  onClick,
+  style,
 }) => {
   const {
     atoms: { flex },
@@ -34,8 +36,7 @@ const Button: FC<ButtonProps> = ({
   };
 
   const styles = styleSheets({
-    box: {
-      ...flex.cc,
+    box: [flex.cc, {
       flexDirection: 'row',
       label: 'button',
       cursor: 'pointer',
@@ -49,7 +50,7 @@ const Button: FC<ButtonProps> = ({
       '&: hover': {
         backgroundColor: `${colors.acent}9D`,
       },
-    },
+    }, style],
   });
 
   return (

@@ -24,7 +24,7 @@ const Contact = () => {
   } = useAtomsGuilde();
 
   const css = styleSheets({
-    card: [flex.rb, {
+    card: [flex.cc, {
       width: '100%',
       padding: ['2em 1em', '2em'],
       flexDirection: ['column', 'row'],
@@ -39,17 +39,10 @@ const Contact = () => {
     }],
     label: [texts.d2, { paddingBottom: '1em' }],
     email: [texts.h4, {
-      paddingBottom: '1rem',
       color: colors.acent,
-      lineHeight: '2em',
     }],
-    text: [texts.h5, {
+    text: [texts.b1, {
       paddingBottom: '1rem',
-      lineHeight: '2em',
-    }],
-    footer: [flex.lt, {
-      flexDirection: 'row',
-      gap: '1em',
     }],
     aside: [flex.cc, { flex: [1, 2] }],
     image: {

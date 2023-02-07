@@ -29,10 +29,11 @@ const History = () => {
     main: flex.rc,
     d2: [texts.d2, { paddingBottom: '1em' }],
     d1: [texts.d1, { paddingBottom: '1em' }],
-    h4: [texts.h4, {
-      paddingBottom: '1rem',
+    h4: [texts.b1, {
+      paddingBottom: '1.5rem',
       color: colors.acent,
-      lineHeight: '2em',
+      lineHeight: '1.5em',
+      fontWeight: 400,
     }],
     b1: [texts.b1, { paddingBottom: '1rem' }],
     footer: [flex.lt, {

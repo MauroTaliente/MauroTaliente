@@ -2,7 +2,7 @@ export default {
   name: 'fabi',
   tags: ['light', 'rounded'],
   colors: {
-    acent: '#57A0F6',
+    acent: '#885cb7',
     primary: '#29233B',
     secondary: '#4E4763',
     ngAcent: '#F8F8FA',
