@@ -20,11 +20,9 @@ const Tag: FC<TagProps> = ({
 
   const sml = size === 'small';
   const styles = styleSheets({
-    box: {
-      ...flex.cc,
+    box: [flex.cc, {
       flexDirection: 'row',
       label: 'button',
-      cursor: 'pointer',
       fontFamily: fontFamily.element,
       fontSize: sml ? '0.5em' : '0.7rem',
       fontWeight: 500,
@@ -35,9 +33,9 @@ const Tag: FC<TagProps> = ({
       backgroundColor: 'transparent',
       borderWidth: '1px',
       borderStyle: 'solid',
-      borderColor: colors.bgPrimary,
+      borderColor: colors.secondary,
       borderRadius: '1em',
-    },
+    }],
   });
 
   return (

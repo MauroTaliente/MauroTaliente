@@ -11,7 +11,7 @@ const {
   forceIrr: false,
   styles: { mode: 'facepaint' },
   breakPoints: { sm: 640, md: 768, lg: 1024, xl: 1280, sl: 1440, ul: 1920 },
-  initThemeName: 'scope',
+  initThemeName: 'formal',
   root: {
     colors: { primary: '#eaeaea' },
     fontFamily: { display: '\'Lato\', sans-serif\'' },

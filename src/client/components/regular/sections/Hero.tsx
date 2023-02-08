@@ -13,8 +13,8 @@ const getData = (clean: boolean) => ({
     href: 'mailto:mauro.taliente3@gmail.com',
   },
   image: {
-    src: assets(clean ? 'images/mauro-white.png' : 'images/mauro_saludo.png'),
-    srcSet: assets(clean ? 'images/mauro-white@2x.png 1.5x' : 'images/mauro_saludo@2x.png 1.5x'),
+    src: assets(clean ? 'images/mauro_yellow.png' : 'images/mauro_saludo.png'),
+    srcSet: assets(clean ? 'images/mauro_yellow@2x.png 1.5x' : 'images/mauro_saludo@2x.png 1.5x'),
     alt: 'emogi de Mauro saludando',
   },
 });

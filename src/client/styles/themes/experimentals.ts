@@ -25,7 +25,7 @@ const formal = {
     secondary: '#747474',
     ngAcent: '#f0f0f0',
     bgPrimary: '#f0f0f0',
-    bgSecondary: '#ffffff',
+    bgSecondary: '#e5e0dc',
   },
   fontFamily: {
     display: 'Playfair Display',

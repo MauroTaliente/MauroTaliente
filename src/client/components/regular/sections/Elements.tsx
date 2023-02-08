@@ -14,6 +14,18 @@ const data = {
     src: assets('images/mauro_ball.png'),
     alt: 'bola violeta',
   },
+  shapeA: {
+    src: assets('images/shape_formal_d.svg'),
+    alt: 'shape',
+  },
+  shapeB: {
+    src: assets('images/shape_formal_b.svg'),
+    alt: 'shape',
+  },
+  key: {
+    src: assets('images/key_scope.svg'),
+    alt: 'key',
+  },
 };
 
 const Elements: FC<any> = ({ children }) => {
@@ -21,7 +33,10 @@ const Elements: FC<any> = ({ children }) => {
     breakPoints: bp,
     atoms: { flex },
     helpers: { styleSheets },
-    state: { tagsFlags: { light, clean } },
+    state: {
+      tagsFlags: { light, clean },
+      themesFlags: { formal, scope },
+    },
   } = useAtomsGuilde(0);
   const css = styleSheets({
     container: [flex.cc, {
@@ -31,7 +46,6 @@ const Elements: FC<any> = ({ children }) => {
       zIndex: 1,
     }],
     content: [flex.cb, {
-      display: !clean ? 'flex' : 'none',
       position: 'relative',
       width: '100%',
       height: '100vh',
@@ -40,27 +54,59 @@ const Elements: FC<any> = ({ children }) => {
     element: {
       display: 'flex',
       width: '50%',
-      maxWidth: '256px',
     },
+    threed: { display: !clean ? 'flex' : 'none' },
     donut: {
       alignSelf: light ? 'center' : 'flex-start',
+      maxWidth: '256px',
     },
     disk: {
       alignSelf: 'flex-start',
       marginLeft: light ? 0 : '15%',
+      maxWidth: '256px',
     },
     ball: {
       alignSelf: 'flex-end',
+      maxWidth: '256px',
+    },
+    formal: { display: formal ? 'flex' : 'none' },
+    shapeA: {
+      position: 'absolute',
+      top: ['512px', '48px'],
+      right: ['-32px', '16px'],
+      width: '480px',
+    },
+    shapeB: {
+      display: ['none', 'none', 'flex'],
+      position: 'absolute',
+      top: '172px',
+      left: '64px',
+      width: '256px',
+      opacity: 0.7,
+    },
+    scope: { display: scope ? 'flex' : 'none' },
+    key: {
+      position: 'absolute',
+      top: ['512px', '96px'],
+      right: '124px',
+      width: '144px',
     },
   });
   return (
     <>
       { children }
       <div css={css.container}>
-        <div css={css.content}>
+        <div css={[css.content, css.threed]}>
             <img css={[css.element, css.donut]} {...data.donut}/>
             <img css={[css.element, css.disk]} {...data.disk}/>
             <img css={[css.element, css.ball]} {...data.ball}/>
+        </div>
+        <div css={[css.content, css.formal]}>
+            <img css={[css.element, css.shapeA]} {...data.shapeA}/>
+            <img css={[css.element, css.shapeB]} {...data.shapeB}/>
+        </div>
+        <div css={[css.content, css.scope]}>
+            <img css={[css.element, css.key]} {...data.key}/>
         </div>
       </div>
     </>

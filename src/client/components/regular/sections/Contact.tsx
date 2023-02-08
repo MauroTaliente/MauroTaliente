@@ -6,7 +6,7 @@ const data = {
   text: '¿Estas creando un proyecto, necesitas asesoría o simplemente quieres enviar un saludo?',
   email: {
     href: 'mailto:mauro.taliente3@gmail.com',
-    title: 'mauro.taliente3@gmail.com',
+    title: 'mauro.taliente3\n@gmail.com',
   },
   image: {
     src: assets('images/mauro_llamar.png'),
@@ -40,6 +40,7 @@ const Contact = () => {
     label: [texts.d2, { paddingBottom: '1em' }],
     email: [texts.h4, {
       color: colors.acent,
+      whiteSpace: ['pre-line', 'normal'],
     }],
     text: [texts.b1, {
       paddingBottom: '1rem',

@@ -93,7 +93,7 @@ const useAtomsGuilde = (refreshLevel: 0 | 1 = 0) => {
     const texts = styleSheets({
       h1: {
         ...commons.hedings,
-        fontWeight: 700,
+        fontWeight: 900,
         fontSize: '3em',
       },
       h2: {

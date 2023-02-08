@@ -47,14 +47,25 @@ const Proyects: FC = () => {
     theme: { colors },
     helpers: { styleSheets },
     atoms: { flex, briks, texts },
+    state: { tagsFlags: { clean } },
   } = useAtomsGuilde();
 
   const styles = styleSheets({
     container: [briks.container, {
       zIndex: 2,
-      backgroundColor: `${colors.bgPrimary}6D`,
+      position: 'relative',
     }],
+    scopeBg: {
+      width: '100%',
+      height: '100%',
+      flex: 1,
+      position : 'absolute',
+      backgroundColor: `${colors.bgSecondary}6D`,
+      backdropFilter: clean ? 'blur(10px)' : 'blur(1px)',
+      display: 'flex',
+    },
     content: [briks.content, {
+      zIndex: 2,
       flexWrap: 'wrap',
       gap: '3em',
     }],
@@ -83,6 +94,7 @@ const Proyects: FC = () => {
           />
         ))}
       </div>
+      <div css={styles.scopeBg} />
     </section>
   );
 };
