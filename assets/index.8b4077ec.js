@@ -10867,7 +10867,7 @@ const formal = {
     secondary: "#747474",
     ngAcent: "#f0f0f0",
     bgPrimary: "#f0f0f0",
-    bgSecondary: "#ffffff"
+    bgSecondary: "#e5e0dc"
   },
   fontFamily: {
     display: "Playfair Display",
@@ -10925,7 +10925,7 @@ const {
     sl: 1440,
     ul: 1920
   },
-  initThemeName: "scope",
+  initThemeName: "formal",
   root: {
     colors: {
       primary: "#eaeaea"
@@ -11030,7 +11030,7 @@ const useAtomsGuilde = (refreshLevel = 0) => {
     const texts = styleSheets({
       h1: {
         ...commons.hedings,
-        fontWeight: 700,
+        fontWeight: 900,
         fontSize: "3em"
       },
       h2: {
@@ -11184,8 +11184,8 @@ const getData = (clean) => ({
     href: "mailto:mauro.taliente3@gmail.com"
   },
   image: {
-    src: assets(clean ? "images/mauro-white.png" : "images/mauro_saludo.png"),
-    srcSet: assets(clean ? "images/mauro-white@2x.png 1.5x" : "images/mauro_saludo@2x.png 1.5x"),
+    src: assets(clean ? "images/mauro_yellow.png" : "images/mauro_saludo.png"),
+    srcSet: assets(clean ? "images/mauro_yellow@2x.png 1.5x" : "images/mauro_saludo@2x.png 1.5x"),
     alt: "emogi de Mauro saludando"
   }
 });
@@ -11361,11 +11361,9 @@ const Tag = ({
   } = useAtomsGuilde(0);
   const sml = size === "small";
   const styles = styleSheets({
-    box: {
-      ...flex.cc,
+    box: [flex.cc, {
       flexDirection: "row",
       label: "button",
-      cursor: "pointer",
       fontFamily: fontFamily.element,
       fontSize: sml ? "0.5em" : "0.7rem",
       fontWeight: 500,
@@ -11376,9 +11374,9 @@ const Tag = ({
       backgroundColor: "transparent",
       borderWidth: "1px",
       borderStyle: "solid",
-      borderColor: colors.bgPrimary,
+      borderColor: colors.secondary,
       borderRadius: "1em"
-    }
+    }]
   });
   return /* @__PURE__ */ jsx("button", {
     css: styles.box,
@@ -11556,14 +11554,29 @@ const Proyects = () => {
       flex,
       briks,
       texts
+    },
+    state: {
+      tagsFlags: {
+        clean
+      }
     }
   } = useAtomsGuilde();
   const styles = styleSheets({
     container: [briks.container, {
       zIndex: 2,
-      backgroundColor: `${colors.bgPrimary}6D`
+      position: "relative"
     }],
+    scopeBg: {
+      width: "100%",
+      height: "100%",
+      flex: 1,
+      position: "absolute",
+      backgroundColor: `${colors.bgSecondary}6D`,
+      backdropFilter: clean ? "blur(10px)" : "blur(1px)",
+      display: "flex"
+    },
     content: [briks.content, {
+      zIndex: 2,
       flexWrap: "wrap",
       gap: "3em"
     }],
@@ -11571,9 +11584,9 @@ const Proyects = () => {
       width: "100%"
     }]
   });
-  return /* @__PURE__ */ jsx("section", {
+  return /* @__PURE__ */ jsxs("section", {
     css: styles.container,
-    children: /* @__PURE__ */ jsxs("div", {
+    children: [/* @__PURE__ */ jsxs("div", {
       id: "projects",
       css: styles.content,
       children: [/* @__PURE__ */ jsxs("header", {
@@ -11594,7 +11607,9 @@ const Proyects = () => {
         image: x2.image,
         tags: x2.tags
       }, x2.title))]
-    })
+    }), /* @__PURE__ */ jsx("div", {
+      css: styles.scopeBg
+    })]
   });
 };
 const data$4 = {
@@ -11689,7 +11704,7 @@ const data$3 = {
   text: "\xBFEstas creando un proyecto, necesitas asesor\xEDa o simplemente quieres enviar un saludo?",
   email: {
     href: "mailto:mauro.taliente3@gmail.com",
-    title: "mauro.taliente3@gmail.com"
+    title: "mauro.taliente3\n@gmail.com"
   },
   image: {
     src: assets("images/mauro_llamar.png"),
@@ -11734,7 +11749,8 @@ const Contact = () => {
       paddingBottom: "1em"
     }],
     email: [texts.h4, {
-      color: colors.acent
+      color: colors.acent,
+      whiteSpace: ["pre-line", "normal"]
     }],
     text: [texts.b1, {
       paddingBottom: "1rem"
@@ -11824,6 +11840,18 @@ const data$1 = {
   ball: {
     src: assets("images/mauro_ball.png"),
     alt: "bola violeta"
+  },
+  shapeA: {
+    src: assets("images/shape_formal_d.svg"),
+    alt: "shape"
+  },
+  shapeB: {
+    src: assets("images/shape_formal_b.svg"),
+    alt: "shape"
+  },
+  key: {
+    src: assets("images/key_scope.svg"),
+    alt: "key"
   }
 };
 const Elements = ({
@@ -11841,6 +11869,10 @@ const Elements = ({
       tagsFlags: {
         light,
         clean
+      },
+      themesFlags: {
+        formal: formal2,
+        scope: scope2
       }
     }
   } = useAtomsGuilde(0);
@@ -11852,7 +11884,6 @@ const Elements = ({
       zIndex: 1
     }],
     content: [flex.cb, {
-      display: !clean ? "flex" : "none",
       position: "relative",
       width: "100%",
       height: "100vh",
@@ -11860,25 +11891,56 @@ const Elements = ({
     }],
     element: {
       display: "flex",
-      width: "50%",
-      maxWidth: "256px"
+      width: "50%"
+    },
+    threed: {
+      display: !clean ? "flex" : "none"
     },
     donut: {
-      alignSelf: light ? "center" : "flex-start"
+      alignSelf: light ? "center" : "flex-start",
+      maxWidth: "256px"
     },
     disk: {
       alignSelf: "flex-start",
-      marginLeft: light ? 0 : "15%"
+      marginLeft: light ? 0 : "15%",
+      maxWidth: "256px"
     },
     ball: {
-      alignSelf: "flex-end"
+      alignSelf: "flex-end",
+      maxWidth: "256px"
+    },
+    formal: {
+      display: formal2 ? "flex" : "none"
+    },
+    shapeA: {
+      position: "absolute",
+      top: ["512px", "48px"],
+      right: ["-32px", "16px"],
+      width: "480px"
+    },
+    shapeB: {
+      display: ["none", "none", "flex"],
+      position: "absolute",
+      top: "172px",
+      left: "64px",
+      width: "256px",
+      opacity: 0.7
+    },
+    scope: {
+      display: scope2 ? "flex" : "none"
+    },
+    key: {
+      position: "absolute",
+      top: ["512px", "96px"],
+      right: "124px",
+      width: "144px"
     }
   });
   return /* @__PURE__ */ jsxs(Fragment, {
-    children: [children, /* @__PURE__ */ jsx("div", {
+    children: [children, /* @__PURE__ */ jsxs("div", {
       css: css2.container,
-      children: /* @__PURE__ */ jsxs("div", {
-        css: css2.content,
+      children: [/* @__PURE__ */ jsxs("div", {
+        css: [css2.content, css2.threed, "", ""],
         children: [/* @__PURE__ */ jsx("img", {
           css: [css2.element, css2.donut, "", ""],
           ...data$1.donut
@@ -11889,7 +11951,22 @@ const Elements = ({
           css: [css2.element, css2.ball, "", ""],
           ...data$1.ball
         })]
-      })
+      }), /* @__PURE__ */ jsxs("div", {
+        css: [css2.content, css2.formal, "", ""],
+        children: [/* @__PURE__ */ jsx("img", {
+          css: [css2.element, css2.shapeA, "", ""],
+          ...data$1.shapeA
+        }), /* @__PURE__ */ jsx("img", {
+          css: [css2.element, css2.shapeB, "", ""],
+          ...data$1.shapeB
+        })]
+      }), /* @__PURE__ */ jsx("div", {
+        css: [css2.content, css2.scope, "", ""],
+        children: /* @__PURE__ */ jsx("img", {
+          css: [css2.element, css2.key, "", ""],
+          ...data$1.key
+        })
+      })]
     })]
   });
 };
